@@ -348,18 +348,11 @@ def render_readme(text):
             count = slugs.get(slug, 0)
             slugs[slug] = count + 1
             token.attrSet("id", slug if count == 0 else f"{slug}-{count}")
-        for child in token.children or []:
-            attr = "href" if child.type == "link_open" else "src" if child.type == "image" else None
-            if not attr:
-                continue
-            url = child.attrGet(attr)
-            if url and not urlsplit(url).scheme and not url.startswith(("/", "#", "?")):
-                child.attrSet(attr, "../" + url)
     return markdown.renderer.render(tokens, markdown.options, {})
 
 
 def sync_main_board():
-    path = HERE / "MainBoard.html"
+    path = HERE.parent / "MainBoard.html"
     template = path.read_text(encoding="utf-8")
     readme_html = render_readme((HERE.parent / "README.md").read_text(encoding="utf-8"))
     readme = json.dumps(readme_html, ensure_ascii=False).replace("</", "<\\/")
