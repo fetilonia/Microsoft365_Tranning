@@ -10,6 +10,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from urllib.parse import urlsplit
 
 HERE = Path(__file__).resolve().parent
 NODE = re.compile(r"^(\d+)\.\s*\[(시작|처리|판단|차단|끝)\]\s*(.*)$")
@@ -284,6 +285,93 @@ def assemble(parts_dir):
     return "\n".join(f.read_text(encoding="utf-8").rstrip() + "\n" for f in files)
 
 
+def source_urls(data):
+    urls = set()
+    pattern = re.compile(r"https?://[^\s;<>]+")
+    for product in data:
+        for feature in product["l2"]:
+            for tab in feature["l3"]:
+                for note in tab["notes"]:
+                    if note["kind"] == "출처":
+                        urls.update(pattern.findall(note["text"]))
+                for group in tab.get("sim", {}).get("groups", []):
+                    urls.update(pattern.findall(group["f"].get("출처", "")))
+                    for option in group["options"]:
+                        urls.update(pattern.findall(option["f"].get("출처", "")))
+    return urls
+
+
+def insert_source_titles(template, data):
+    titles = json.loads((HERE / "source_titles_ko.json").read_text(encoding="utf-8"))
+    translations = json.loads((HERE / "source_title_translations.json").read_text(encoding="utf-8"))
+    missing = sorted(source_urls(data) - titles.keys())
+    for url in missing:
+        print(f"출처 제목 확인 필요: {url}", file=sys.stderr)
+    if missing:
+        print(f"출처 제목 확인 필요 {len(missing)}건", file=sys.stderr)
+    untranslated = sorted({titles[url] for url in source_urls(data) & titles.keys()
+                           if not re.search(r"[가-힣]", titles[url]) and titles[url] not in translations})
+    for title in untranslated:
+        print(f"출처 제목 한국어 번역 필요: {title}", file=sys.stderr)
+    marker = "/*__SOURCE_TITLES__*/{}"
+    translation_marker = "/*__SOURCE_TRANSLATIONS__*/{}"
+    if marker not in template or translation_marker not in template:
+        raise ValueError("MainBoard 출처 제목 영역이 없습니다")
+    return (template.replace(marker, json.dumps(titles, ensure_ascii=False).replace("</", "<\\/"))
+            .replace(translation_marker, json.dumps(translations, ensure_ascii=False).replace("</", "<\\/")))
+
+
+def render_readme(text):
+    from markdown_it import MarkdownIt
+
+    markdown = MarkdownIt("commonmark", {"html": False}).enable("table")
+    default_validate = markdown.validateLink
+
+    def safe_link(url):
+        if url.startswith(("//", "\\")):
+            return False
+        try:
+            parts = urlsplit(url)
+        except ValueError:
+            return False
+        return parts.scheme.lower() in ("", "http", "https", "mailto") and default_validate(url)
+
+    markdown.validateLink = safe_link
+    tokens = markdown.parse(text)
+    slugs = {}
+    for index, token in enumerate(tokens):
+        if token.type == "heading_open" and index + 1 < len(tokens):
+            inline = tokens[index + 1]
+            title = "".join(child.content for child in inline.children or []
+                            if child.type in ("text", "code_inline"))
+            slug = re.sub(r"[^\w -]", "", title.lower()).replace(" ", "-")
+            count = slugs.get(slug, 0)
+            slugs[slug] = count + 1
+            token.attrSet("id", slug if count == 0 else f"{slug}-{count}")
+        for child in token.children or []:
+            attr = "href" if child.type == "link_open" else "src" if child.type == "image" else None
+            if not attr:
+                continue
+            url = child.attrGet(attr)
+            if url and not urlsplit(url).scheme and not url.startswith(("/", "#", "?")):
+                child.attrSet(attr, "../" + url)
+    return markdown.renderer.render(tokens, markdown.options, {})
+
+
+def sync_main_board():
+    path = HERE / "MainBoard.html"
+    template = path.read_text(encoding="utf-8")
+    readme_html = render_readme((HERE.parent / "README.md").read_text(encoding="utf-8"))
+    readme = json.dumps(readme_html, ensure_ascii=False).replace("</", "<\\/")
+    pattern = r'(<script id="readme-data" type="application/json">).*?(</script>)'
+    template, count = re.subn(pattern, lambda m: m.group(1) + readme + m.group(2), template, count=1, flags=re.S)
+    if count != 1:
+        raise ValueError("MainBoard README 데이터 영역이 없습니다")
+    if template != path.read_text(encoding="utf-8"):
+        path.write_text(template, encoding="utf-8")
+    return template
+
+
 def main():
     args = [a for a in sys.argv[1:] if not a.startswith("--")]
     write_md = None
@@ -320,7 +408,7 @@ def main():
             print("점검:", w)
         print(f"점검 경고 {len(WARN) + len(lw)}건")
         return
-    tpl = (HERE / "board_template.html").read_text(encoding="utf-8")
+    tpl = insert_source_titles(sync_main_board(), data)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     sim_js = (HERE / "sim_engine.js").read_text(encoding="utf-8") + "\n" + (HERE / "sim_ui.js").read_text(encoding="utf-8")
     out.write_text(tpl.replace("/*__DATA__*/null", payload).replace("/*__SIM__*/", sim_js), encoding="utf-8")

@@ -40,10 +40,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .l1h .nm{flex:1;min-width:0}.l1h .nm b{display:block;font-size:13px}.l1h .nm i{display:block;font-style:normal;color:var(--mut);font-size:10.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .l1h .cnt{font-size:10px;color:var(--mut);border:1px solid var(--line);border-radius:10px;padding:1px 7px}
 .l1h .car{color:var(--mut);transition:transform .2s}
+.l1h.workload{color:inherit;text-decoration:none}
+.l1h.workload:hover,.l1h.workload:focus-visible{background:#193e37}
 .l1:not(.open) .car{transform:rotate(-90deg)}
 .l1:not(.open) .l1body{display:none}
 .grp{margin:10px 2px 4px 4px;font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.4px;display:flex;align-items:center;gap:6px}
 .grp::after{content:"";flex:1;height:1px;background:var(--line2)}
+button.section-toggle{margin-top:10px}
 .card{width:100%;display:flex;gap:8px;align-items:flex-start;text-align:left;background:#123530;border:1.5px solid var(--line2);border-radius:8px;padding:7px 9px;margin:4px 0;opacity:.78;transition:.15s}
 .card:hover{opacity:1;border-color:var(--line)}
 .card .dot{width:8px;height:8px;border-radius:50%;margin-top:5px;background:var(--grn);flex:none}
@@ -183,6 +186,20 @@ table.tt{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11.5px
 .note b{margin-right:6px}
 .note.k-교육{border-left-color:var(--grn)}.note.k-주의{border-left-color:var(--amb)}.note.k-예시,.note.k-예{border-left-color:var(--blue)}.note.k-출처{border-left-color:#7a8f8a}
 .note a{color:#9bd0ff;word-break:break-all}
+.source-panel{margin-top:12px}
+.source-toggle{cursor:pointer;list-style:none}
+.source-toggle::-webkit-details-marker{display:none}
+.source-panel:not([open]) .source-toggle .car{transform:rotate(-90deg)}
+.source-list{display:grid;gap:6px;margin-top:6px}
+.source-list .note a{word-break:normal;overflow-wrap:anywhere}
+.source-original{display:block;color:var(--mut);font-size:11px;margin-top:3px}
+.readme{line-height:1.65;overflow-wrap:anywhere}
+.readme h1,.readme h2,.readme h3{margin:1em 0 .45em}
+.readme a,.readme-source{color:#9bd0ff}
+.readme table{border-collapse:collapse;display:block;max-width:100%;overflow-x:auto}
+.readme th,.readme td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+.readme pre{overflow:auto;background:#0b211e;border:1px solid var(--line);border-radius:8px;padding:12px}
+.readme code{font-family:monospace}
 .ph{margin-top:14px;border:1.5px dashed var(--line);border-radius:10px;padding:26px;text-align:center;color:var(--mut)}
 .bd{display:inline-block;font-size:9.5px;font-weight:700;border:1px solid var(--line);border-radius:8px;padding:0 5px;margin:0 2px;color:#bfe0d8;vertical-align:1px}
 .bd.warn{color:#ffd37a;border-color:#8a6b1f;background:rgba(240,182,74,.1)}
@@ -369,6 +386,7 @@ table.tt{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11.5px
   <div class="top">
     <h1>교육 보드 · Microsoft Entra Admin Center › 기능별 데이터 흐름</h1>
     <p>왼쪽에서 기능을 고르면, 기능이 꺼져 있을 때부터 켜진 뒤까지의 시나리오 흐름이 가운데에 나옵니다. 시나리오 버튼을 누르면 그 흐름만 재생합니다.</p>
+    <a id="home-link" href="../entra-edu-board/MainBoard.html">← 전체 워크로드</a>
   </div>
   <div class="steps">
     <div class="chip c1"><small>L1 · 제품</small><b id="s1"></b></div>
@@ -387,9 +405,60 @@ table.tt{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11.5px
   </div>
 </div>
 
+<script id="readme-data" type="application/json">"<h1 id=\"microsoft365_tranning\">Microsoft365_Tranning<\/h1>\n<p>Microsoft 365 전반에 걸친 트레이닝 보드를 구축하고, 이를 바탕으로 내부 커리큘럼의 초안을 만드는 저장소입니다.<\/p>\n<p>각 보드는 Markdown 원고에서 생성하는 단독 실행 HTML입니다. Entra 보드는 기능을 고르면 &quot;기능이 꺼져 있을 때 → 구성할 때 → 켠 뒤&quot;의 시나리오별 데이터 흐름을 애니메이션으로 보여 줍니다. 다른 보드는 분리 원고의 설정 · 강제 · 증적만 담은 검증 전 초안으로, 시나리오와 출처는 아직 작성되지 않았습니다.<\/p>\n<h2 id=\"구성\">구성<\/h2>\n<table>\n<thead>\n<tr>\n<th>폴더<\/th>\n<th>내용<\/th>\n<th>상태<\/th>\n<\/tr>\n<\/thead>\n<tbody>\n<tr>\n<td><a href=\"../entra-edu-board/\"><code>entra-edu-board/<\/code><\/a><\/td>\n<td>Microsoft Entra Admin Center(Entra ID 워크로드) 교육 보드 — 기능 37개, 시나리오 261개<\/td>\n<td>작성 중<\/td>\n<\/tr>\n<tr>\n<td><a href=\"../edu-intune-board/\"><code>edu-intune-board/<\/code><\/a><\/td>\n<td>Intune<\/td>\n<td>초안<\/td>\n<\/tr>\n<tr>\n<td><a href=\"../edu-purview-board/\"><code>edu-purview-board/<\/code><\/a><\/td>\n<td>Purview<\/td>\n<td>초안<\/td>\n<\/tr>\n<tr>\n<td><a href=\"../edu-defender-board/\"><code>edu-defender-board/<\/code><\/a><\/td>\n<td>Defender XDR · Defender for Cloud<\/td>\n<td>초안<\/td>\n<\/tr>\n<tr>\n<td><a href=\"../edu-copilot-board/\"><code>edu-copilot-board/<\/code><\/a><\/td>\n<td>Copilot · Graph<\/td>\n<td>초안<\/td>\n<\/tr>\n<tr>\n<td>각 보드의 <code>원본/<\/code><\/td>\n<td>기능별 편집 원고<\/td>\n<td>검증 및 시나리오 작성 필요<\/td>\n<\/tr>\n<tr>\n<td><a href=\"../entra-edu-board/split/\"><code>entra-edu-board/split/<\/code><\/a><\/td>\n<td>기존 분리본 원고<\/td>\n<td>참고용<\/td>\n<\/tr>\n<\/tbody>\n<\/table>\n<p>제품별 보드를 나눕니다. Defender 보드는 XDR과 Defender for Cloud를 별도 섹션으로 담습니다.<\/p>\n<h2 id=\"빠른-시작\">빠른 시작<\/h2>\n<p><a href=\"../entra-edu-board/MainBoard.html\"><code>MainBoard.html<\/code><\/a>을 열면 프로젝트 소개와 워크로드별 보드를 볼 수 있습니다.<\/p>\n<pre><code class=\"language-bash\">python3 -m pip install -r requirements.txt\ncd entra-edu-board\npython3 build_board.py            # 원본/ → entra-edu-board.html, &quot;점검 경고 0건&quot;이어야 함\ncd ..\npython3 -m http.server 8765       # http://127.0.0.1:8765/entra-edu-board/MainBoard.html\n<\/code><\/pre>\n<p>자세한 구조와 편집 방법은 <a href=\"../entra-edu-board/README.md\"><code>entra-edu-board/README.md<\/code><\/a>를 보세요.<\/p>\n<p>다른 네 초안 보드를 다시 만들려면 저장소 루트에서 <code>python3 build_edu_boards.py<\/code>를 실행하세요. 각 보드의 <code>원본/<\/code>에서 기능별 MD를 편집하며, 기존 <code>split/<\/code> 파일은 참고용입니다. 원고의 내용을 Microsoft Learn으로 검증하고 메뉴 · 라이선스 · 출처와 L3/L4 시나리오를 채우기 전에는 완성된 교육 자료로 사용하지 마세요.<\/p>\n<p>메인 보드의 프로젝트 소개는 이 README의 빌드 시점 복사본입니다. README를 수정한 뒤 Entra 또는 초안 보드를 다시 빌드하면 함께 갱신됩니다.<\/p>\n"</script>
 <script>
 const DATA = /*__DATA__*/null;
+const SOURCE_TITLES = /*__SOURCE_TITLES__*/{};
+const SOURCE_TRANSLATIONS = /*__SOURCE_TRANSLATIONS__*/{};
 
+if (DATA === null) {
+  document.title = 'Microsoft 365 교육 보드';
+  document.querySelector('.top h1').textContent = 'Microsoft 365 교육 보드';
+  document.querySelector('.top p').textContent = '프로젝트 소개를 읽고 왼쪽에서 워크로드를 선택하세요.';
+  document.querySelector('#home-link').hidden = true;
+  document.querySelector('.steps').hidden = true;
+  const workloads = [
+    ['01.', 'Microsoft Entra Admin Center', '신원 · 접근 · 거버넌스 · 네트워크', 'entra-edu-board.html'],
+    ['02', 'Intune', '디바이스 · 앱 관리', '../edu-intune-board/edu-intune-board.html'],
+    ['03', 'Purview', '데이터 거버넌스', '../edu-purview-board/edu-purview-board.html'],
+    ['04', 'Defender', 'Defender XDR · Defender for Cloud', '../edu-defender-board/edu-defender-board.html'],
+    ['05', 'Copilot · Graph', '하나의 답에 걸리는 모든 통제', '../edu-copilot-board/edu-copilot-board.html']
+  ];
+  const blade = document.querySelector('#blade');
+  blade.innerHTML = '<div class="bl-h">워크로드</div>';
+  workloads.forEach(([id, name, description, url]) => {
+    const link = document.createElement('a');
+    link.className = 'l1h workload';
+    link.href = url;
+    const number = document.createElement('span');
+    number.className = 'id';
+    number.textContent = id;
+    const label = document.createElement('span');
+    label.className = 'nm';
+    const title = document.createElement('b');
+    title.textContent = name;
+    const detail = document.createElement('i');
+    detail.textContent = description;
+    label.append(title, detail);
+    const arrow = document.createElement('span');
+    arrow.className = 'car';
+    arrow.setAttribute('aria-hidden', 'true');
+    arrow.textContent = '›';
+    link.append(number, label, arrow);
+    blade.appendChild(link);
+  });
+  const center = document.querySelector('#center');
+  const heading = document.createElement('h2');
+  heading.textContent = '프로젝트 소개 · README.md';
+  const source = document.createElement('a');
+  source.href = '../README.md';
+  source.className = 'readme-source';
+  source.textContent = 'README 원본 열기';
+  const readme = document.createElement('article');
+  readme.className = 'readme';
+  readme.innerHTML = JSON.parse(document.querySelector('#readme-data').textContent);
+  center.append(heading, source, readme);
+} else {
 const GROUP_ORDER = ['개요','ID','애플리케이션','보호','ID 거버넌스','외부 ID','하이브리드 관리','Global Secure Access','에이전트 ID','Verified ID','모니터링 및 상태'];
 const NW=176, NH=124, GXE=84, GY=40, PADT=46, GUT=64;
 let COLS=4;
@@ -400,6 +469,9 @@ const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const st = {l1:0,l2:0,l3:0,l4:0,route:0,speed:1,paused:false};
 const open = DATA.map((_,i)=>i===0);
+const groupOpen = new Map();
+const isEntra = l1 => l1.id === '01' && l1.name === 'Microsoft Entra Admin Center';
+const groupKey = (i,g) => `${i}:${g}`;
 let runId = 0, chainId = 0, view = null;
 const FLAT = [];
 DATA.forEach(l1=>{
@@ -412,11 +484,14 @@ DATA.forEach((l1,i)=>l1.l2.forEach((_,j)=>FLAT.push([i,j])));
 function renderBlade(){
   const el = $('#blade'); el.innerHTML = '<div class="bl-h">구조 도식 · 왼쪽 블레이드 = 기능별 소개</div>';
   DATA.forEach((l1,i)=>{
-    const sec = document.createElement('div'); sec.className = 'l1' + (open[i]?' open':'');
-    const h = document.createElement('button'); h.className='l1h';
-    h.innerHTML = `<span class="id">${esc(l1.id)}</span><span class="nm"><b>${esc(l1.name)}</b><i>${esc(l1.desc)}</i></span><span class="cnt">${l1.l2.length}</span><span class="car">▾</span>`;
-    h.onclick = ()=>{ open[i]=!open[i]; renderBlade(); };
-    sec.appendChild(h);
+    const entra = isEntra(l1);
+    const sec = document.createElement('div'); sec.className = 'l1' + (entra || open[i]?' open':'');
+    if(!entra){
+      const h = document.createElement('button'); h.className='l1h';
+      h.innerHTML = `<span class="id">${esc(l1.id)}</span><span class="nm"><b>${esc(l1.name)}</b><i>${esc(l1.desc)}</i></span><span class="cnt">${l1.l2.length}</span><span class="car">▾</span>`;
+      h.onclick = ()=>{ open[i]=!open[i]; renderBlade(); };
+      sec.appendChild(h);
+    }
     const body = document.createElement('div'); body.className='l1body';
     const groups = new Map();
     l1.l2.forEach((l2,j)=>{ const g = l2.group || '기능 목록'; if(!groups.has(g)) groups.set(g,[]); groups.get(g).push([l2,j]); });
@@ -424,16 +499,42 @@ function renderBlade(){
       const ia = GROUP_ORDER.indexOf(a), ib = GROUP_ORDER.indexOf(b);
       return (ia<0?99:ia)-(ib<0?99:ib);
     });
-    keys.forEach(g=>{
-      const gh = document.createElement('div'); gh.className='grp'; gh.textContent = g; body.appendChild(gh);
+    keys.forEach((g,k)=>{
+      const list = document.createElement('div');
+      if(entra){
+        const key = groupKey(i,g);
+        const expanded = groupOpen.get(key) !== false;
+        const gh = document.createElement('button'); gh.className='l1h section-toggle';
+        const number = document.createElement('span'); number.className='id';
+        number.textContent = `${String(k+1).padStart(2,'0')}.`;
+        const label = document.createElement('span'); label.className='nm';
+        const title = document.createElement('b'); title.textContent=g; label.appendChild(title);
+        const count = document.createElement('span'); count.className='cnt'; count.textContent=groups.get(g).length;
+        const arrow = document.createElement('span'); arrow.className='car'; arrow.setAttribute('aria-hidden','true');
+        arrow.textContent = expanded ? '▾' : '▸';
+        gh.append(number,label,count,arrow);
+        list.id = `blade-group-${i}-${k}`;
+        list.hidden = !expanded;
+        gh.setAttribute('aria-controls',list.id);
+        gh.setAttribute('aria-expanded',String(expanded));
+        gh.onclick = ()=>{
+          const next = gh.getAttribute('aria-expanded') !== 'true';
+          groupOpen.set(key,next); list.hidden = !next;
+          gh.setAttribute('aria-expanded',String(next)); arrow.textContent = next ? '▾' : '▸';
+        };
+        body.appendChild(gh);
+      } else {
+        const gh = document.createElement('div'); gh.className='grp'; gh.textContent = g; body.appendChild(gh);
+      }
       groups.get(g).forEach(([l2,j])=>{
         const n = l2.l3.reduce((a,x)=>a+x.l4.length,0);
         const c = document.createElement('button');
         c.className = 'card' + (i===st.l1&&j===st.l2?' sel':'') + (n?'':' empty');
         c.innerHTML = `<span class="dot"></span><span class="ct"><b>${rich(l2.title)}</b><i>${rich(l2.desc)}</i></span>` + (n?`<span class="n">${n}개</span>`:'<span class="n todo">작성 필요</span>');
         c.onclick = ()=>selectL2(i,j);
-        body.appendChild(c);
+        list.appendChild(c);
       });
+      body.appendChild(list);
     });
     sec.appendChild(body); el.appendChild(sec);
   });
@@ -442,7 +543,9 @@ function renderBlade(){
 
 function stopAll(){ runId++; chainId++; }
 function selectL2(i,j){
-  stopAll(); Object.assign(st,{l1:i,l2:j,l3:0,l4:0,route:0}); open[i]=true; renderBlade(); renderCenter();
+  stopAll(); Object.assign(st,{l1:i,l2:j,l3:0,l4:0,route:0}); open[i]=true;
+  if(isEntra(DATA[i])) groupOpen.set(groupKey(i,DATA[i].l2[j].group || '기능 목록'),true);
+  renderBlade(); renderCenter();
 }
 function curL2(){ return DATA[st.l1].l2[st.l2]; }
 
@@ -492,7 +595,10 @@ function renderCenter(){
   h += `<div class="narr idle" id="narr"></div>`;
   h += `<div id="tasks"></div>`;
   h += summaryHtml(l2);
-  if(l3.notes.length) h += `<div class="notes">` + l3.notes.map(n=>noteHtml(n)).join('') + `</div>`;
+  const notes = l3.notes.filter(n=>n.kind!=='출처');
+  const sources = l3.notes.filter(n=>n.kind==='출처').map(n=>n.text);
+  if(notes.length) h += `<div class="notes">` + notes.map(n=>noteHtml(n)).join('') + `</div>`;
+  h += sourcePanelHtml(sources);
   $('#center').innerHTML = h;
 
   $('#center').querySelectorAll('.tab').forEach(b=>b.onclick=()=>{ stopAll(); Object.assign(st,{l3:+b.dataset.k,l4:0,route:0}); renderCenter(); });
@@ -512,6 +618,29 @@ function noteHtml(n){
   const k = n.kind.split(' ')[0];
   const t = rich(n.text).replace(/(https?:\/\/[^\s<]+)/g,'<a href="$1" target="_blank" rel="noopener noreferrer">$1</a>');
   return `<div class="note k-${esc(k)}"><b>${esc(n.kind)}</b>${t}</div>`;
+}
+function sourcePanelHtml(sources){
+  if(!sources.length) return '';
+  const links = sources.map(source=>{
+    const url = source.trim();
+    if(!/^https?:\/\//.test(url)) return `<div class="note k-출처">${esc(url)} [제목 확인 필요]</div>`;
+    const original = SOURCE_TITLES[url];
+    const translated = original && SOURCE_TRANSLATIONS[original];
+    const title = translated || original || '[문서 제목 확인 필요]';
+    let target;
+    try { target = new URL(url); }
+    catch(error) {
+      if(!(error instanceof TypeError)) throw error;
+      return `<div class="note k-출처">${esc(url)} [유효하지 않은 주소]</div>`;
+    }
+    if(target.hostname === 'learn.microsoft.com'){
+      target.pathname = '/ko-kr' + target.pathname.replace(/^\/[a-z]{2}-[a-z]{2}(?=\/|$)/i,'');
+    }
+    const translationNote = translated ? `<span class="source-original">번역 · 원문: ${esc(original)}</span>`
+      : original && !/[가-힣]/.test(original) ? '<span class="source-original">한국어 제목 확인 필요</span>' : '';
+    return `<div class="note k-출처"><a href="${esc(target.href)}" title="${esc(target.href)}" target="_blank" rel="noopener noreferrer">${esc(title)}</a>${translationNote}</div>`;
+  }).join('');
+  return `<details class="source-panel"><summary class="l1h source-toggle"><span class="nm"><b>출처</b></span><span class="cnt">${sources.length}</span><span class="car" aria-hidden="true">▾</span></summary><div class="source-list">${links}</div></details>`;
 }
 function syncNav(){
   const idx = FLAT.findIndex(([i,j])=>i===st.l1&&j===st.l2);
@@ -1036,6 +1165,7 @@ $('#restart').onclick = ()=>{ stopAll(); playCurrent(); };
   if(q.get('play')) playCurrent();
   if(q.get('node') && view && view.byId[q.get('node')]){ pinNode(q.get('node')); openNodeDetail(q.get('node')); }
 })();
+}
 </script>
 </body>
 </html>
