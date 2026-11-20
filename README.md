@@ -20,14 +20,14 @@ Microsoft 365 전반에 걸친 트레이닝 보드를 구축하고, 이를 바�
 
 ## 빠른 시작
 
-[`MainBoard.html`](entra-edu-board/MainBoard.html)을 열면 프로젝트 소개와 워크로드별 보드를 볼 수 있습니다.
+[`MainBoard.html`](MainBoard.html)을 열면 프로젝트 소개와 워크로드별 보드를 볼 수 있습니다. GitHub Pages에서는 사이트 루트에서도 메인 보드로 이동합니다.
 
 ```bash
 python3 -m pip install -r requirements.txt
 cd entra-edu-board
 python3 build_board.py            # 원본/ → entra-edu-board.html, "점검 경고 0건"이어야 함
 cd ..
-python3 -m http.server 8765       # http://127.0.0.1:8765/entra-edu-board/MainBoard.html
+python3 -m http.server 8765       # http://127.0.0.1:8765/
 ```
 
 자세한 구조와 편집 방법은 [`entra-edu-board/README.md`](entra-edu-board/README.md)를 보세요.
