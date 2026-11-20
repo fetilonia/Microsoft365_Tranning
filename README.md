@@ -35,3 +35,5 @@ python3 -m http.server 8765       # http://127.0.0.1:8765/
 다른 네 초안 보드를 다시 만들려면 저장소 루트에서 `python3 build_edu_boards.py`를 실행하세요. 각 보드의 `원본/`에서 기능별 MD를 편집하며, 기존 `split/` 파일은 참고용입니다. 원고의 내용을 Microsoft Learn으로 검증하고 메뉴 · 라이선스 · 출처와 L3/L4 시나리오를 채우기 전에는 완성된 교육 자료로 사용하지 마세요.
 
 메인 보드의 프로젝트 소개는 이 README의 빌드 시점 복사본입니다. README를 수정한 뒤 Entra 또는 초안 보드를 다시 빌드하면 함께 갱신됩니다.
+
+공유 미리보기 이미지는 [Kenney Mini Characters](https://kenney.nl/assets/mini-characters)의 캐릭터 렌더를 사용합니다 (CC0).

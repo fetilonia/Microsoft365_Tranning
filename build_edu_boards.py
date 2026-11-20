@@ -31,7 +31,7 @@ def build(name, destination):
         raise ValueError("\n".join(board.WARN))
 
     template = board.insert_source_titles(board.sync_main_board(), data)
-    old_title = "<title>교육 보드 · Microsoft Entra Admin Center — 기능별 데이터 흐름</title>"
+    old_title = "<title>Microsoft 365 교육 보드</title>"
     old_heading = "<h1>교육 보드 · Microsoft Entra Admin Center › 기능별 데이터 흐름</h1>"
     intro = "왼쪽에서 기능을 고르면, 기능이 꺼져 있을 때부터 켜진 뒤까지의 시나리오 흐름이 가운데에 나옵니다. 시나리오 버튼을 누르면 그 흐름만 재생합니다."
     draft_intro = (
