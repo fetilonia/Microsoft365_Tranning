@@ -362,7 +362,13 @@ def sync_main_board():
         raise ValueError("MainBoard README 데이터 영역이 없습니다")
     if template != path.read_text(encoding="utf-8"):
         path.write_text(template, encoding="utf-8")
-    return template
+    board_template, count = re.subn(
+        r"<!-- MAIN_BOARD_SOCIAL_START -->.*?<!-- MAIN_BOARD_SOCIAL_END -->\n",
+        "", template, count=1, flags=re.S,
+    )
+    if count != 1:
+        raise ValueError("MainBoard 소셜 메타데이터 영역이 없습니다")
+    return board_template
 
 
 def main():
@@ -402,6 +408,8 @@ def main():
         print(f"점검 경고 {len(WARN) + len(lw)}건")
         return
     tpl = insert_source_titles(sync_main_board(), data)
+    tpl = tpl.replace("<title>Microsoft 365 교육 보드</title>",
+                      "<title>교육 보드 · Microsoft Entra Admin Center — 기능별 데이터 흐름</title>", 1)
     payload = json.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     sim_js = (HERE / "sim_engine.js").read_text(encoding="utf-8") + "\n" + (HERE / "sim_ui.js").read_text(encoding="utf-8")
     out.write_text(tpl.replace("/*__DATA__*/null", payload).replace("/*__SIM__*/", sim_js), encoding="utf-8")
