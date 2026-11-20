@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """편집 원본 MD(교육보드 편집원본*.md)를 파싱해 단일 HTML 교육 보드를 만든다.
 
-사용: python3 build_board.py [원본.md] [출력.html]
-기본값: 이 폴더의 '교육보드 편집원본*.md' → 이 폴더의 entra-edu-board.html
+사용: python3 build_board.py [원본 디렉터리 또는 .md] [출력.html]
+기본값: 이 폴더의 '원본/'(주제 폴더 → 기능별 MD, 번호 순서로 이어 붙임) → 이 폴더의 entra-edu-board.html
+--write-md <파일>: 원본 디렉터리를 단일 MD로 합쳐 함께 내보냄
 """
 import glob
 import json
@@ -274,8 +275,12 @@ def lint(data):
 
 
 def assemble(parts_dir):
-    """parts/*.md를 파일명 순으로 이어 붙인다 (00-head가 맨 앞)."""
-    files = sorted(Path(parts_dir).glob("*.md"))
+    """원본 폴더 아래 모든 *.md를 경로 순서(번호 접두사)로 이어 붙인다. 00-보드-규격.md가 맨 앞."""
+    root = Path(parts_dir)
+    files = sorted(
+        (f for f in root.rglob("*.md") if not f.name.upper().startswith("README")),
+        key=lambda f: f.relative_to(root).parts,
+    )
     return "\n".join(f.read_text(encoding="utf-8").rstrip() + "\n" for f in files)
 
 
@@ -287,10 +292,13 @@ def main():
         args = [a for a in args if a != str(write_md)]
     src = args[0] if args else None
     if not src:
-        found = sorted(glob.glob(str(HERE / "교육보드 편집원본*.md")))
-        if not found:
-            sys.exit("원본 MD를 찾지 못했습니다. 경로를 인자로 주세요.")
-        src = found[0]
+        if (HERE / "원본").is_dir():
+            src = str(HERE / "원본")
+        else:
+            found = sorted(glob.glob(str(HERE / "교육보드 편집원본*.md")))
+            if not found:
+                sys.exit("원본을 찾지 못했습니다. 경로를 인자로 주세요.")
+            src = found[0]
     out = Path(args[1]) if len(args) > 1 else HERE / "entra-edu-board.html"
     if Path(src).is_dir():
         text = assemble(src)
