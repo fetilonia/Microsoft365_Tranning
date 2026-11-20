@@ -2,20 +2,25 @@
 
 Microsoft Entra Admin Center(Entra ID 워크로드)의 기능별 데이터 흐름을 보여 주는 교육 보드입니다. 왼쪽 블레이드에서 기능을 고르면 가운데 화면에 ⓪ 비활성 · ① 구성 · ② 활성 시나리오와 분기별 시나리오 흐름이 나오고, 아래 Task 상세에서 단계마다의 위치·데이터를 볼 수 있습니다.
 
+왼쪽의 각 섹션 이름을 눌러 기능 목록을 접거나 펼칠 수 있습니다.
+
 ## 파일
 
 | 경로 | 역할 |
 | --- | --- |
 | [`원본/`](원본/) | 내용의 원본. 주제 폴더 아래에 기능별 MD를 둡니다(아래 "원본 구조") |
 | `build_board.py` | `원본/`을 번호 순서로 이어 붙여 파싱·점검(lint)하고 HTML을 조립 |
-| `board_template.html` | 화면 · 도식 레이아웃 · 애니메이션 |
+| `MainBoard.html` | 프로젝트 소개와 워크로드 탐색 화면 · 보드 생성 템플릿 |
 | `sim_engine.js` · `sim_ui.js` | 조건부 액세스 정책 시뮬레이터(평가 엔진 · 콤보박스 UI) |
 | `entra-edu-board.html` | 생성물(단독 실행 HTML) |
-| [`split/`](split/) | 다른 제품의 분리본 원고 — 아직 보드로 만들지 않음 |
+| [`split/`](split/) | 다른 제품의 기존 분리본 원고 — 참고용 |
+
+다른 제품의 초안 보드와 생성 방법은 [저장소 README](../README.md)를 참고하세요. 분리본은 아직 검증 및 시나리오 작성이 필요합니다.
 
 ## 빌드와 확인
 
 ```bash
+python3 -m pip install -r ../requirements.txt  # 저장소 루트의 빌드 의존성
 python3 build_board.py                      # 원본/ → entra-edu-board.html, "점검 경고 0건"이어야 함
 python3 build_board.py 원본 /tmp/out.html   # 출력 경로 지정
 python3 build_board.py 원본 /tmp/out.html --write-md /tmp/all.md   # 단일 MD로 합쳐 보기
@@ -24,6 +29,7 @@ python3 -m http.server 8765                 # http://127.0.0.1:8765/entra-edu-bo
 
 - 딥링크: `?f=<기능 제목 일부>&l3=<탭 번호>&l4=<시나리오 번호>&route=<경로 번호>` · 조건부 액세스 시뮬레이터는 `?f=조건부&l3=1&p=<예시번호>`
 - 문서로 확인하지 못한 항목은 원본에 `[확인 필요]`로 표시되어 있습니다.
+- 출처는 카드형 토글에 Microsoft Learn 한국어 페이지의 H1 제목으로 표시합니다. 한국어 H1이 없는 문서는 번역과 원문을 함께 표시합니다. 제목은 `source_titles_ko.json`, 번역은 `source_title_translations.json`에 저장해 오프라인에서도 표시합니다. 새 출처를 추가한 뒤 `python3 refresh_source_titles.py`로 제목을 가져오고 필요하면 번역을 추가한 다음 보드를 다시 빌드합니다. 가져오지 못한 제목은 `[문서 제목 확인 필요]`로 표시됩니다.
 
 ## 원본 구조
 
@@ -46,14 +52,14 @@ python3 -m http.server 8765                 # http://127.0.0.1:8765/entra-edu-bo
 ```
 
 - `build_board.py`는 `원본/` 아래 모든 `*.md`(README 제외)를 **경로의 번호 접두사 순서**로 이어 붙입니다. 파일을 나눈 경계는 제목 줄(`## L2`, `### L3`, `#### 그룹`) 앞이어야 합니다.
-- 기능 파일은 `## L2 · 제목 — 한 줄 소개`로 시작하고, `- 메뉴(Admin Center): <그룹> > …` 줄이 있어야 합니다. 블레이드 안의 그룹 순서는 `board_template.html`의 `GROUP_ORDER`가 정하고, 같은 그룹 안의 기능 순서는 파일 번호 순서입니다.
+- 기능 파일은 `## L2 · 제목 — 한 줄 소개`로 시작하고, `- 메뉴(Admin Center): <그룹> > …` 줄이 있어야 합니다. 블레이드 안의 그룹 순서는 `MainBoard.html`의 `GROUP_ORDER`가 정하고, 같은 그룹 안의 기능 순서는 파일 번호 순서입니다.
 - 작성 규칙(Task 노드 형식, 분기·`- 시나리오:` 요약 줄 규칙, 깊이 기준)은 [`원본/00-보드-규격.md`](원본/00-보드-규격.md)의 V5입니다. `build_board.py`가 규칙 위반을 `점검 경고`로 알려 줍니다.
 
 ### 기능 추가·수정 방법
 
 1. 주제 폴더 안에 `NN-기능명.md`를 만들거나 기존 파일을 고칩니다. 번호는 그 주제 안의 표시 순서입니다.
 2. `python3 build_board.py`로 `점검 경고 0건`을 확인합니다.
-3. 새 주제(블레이드 그룹)를 만들면 `board_template.html`의 `GROUP_ORDER`에도 그룹 이름을 넣습니다. 목록에 없으면 블레이드 맨 아래에 놓입니다.
+3. 새 주제(블레이드 그룹)를 만들면 `MainBoard.html`의 `GROUP_ORDER`에도 그룹 이름을 넣습니다. 목록에 없으면 블레이드 맨 아래에 놓입니다.
 4. 생성된 `entra-edu-board.html`을 함께 커밋합니다.
 
 ## 기능 목록

@@ -478,7 +478,6 @@ function renderSimDetail(){
   const f = d.o ? (sOpt(d.o)?.f||{}) : g.f;
   const title = d.o ? sLab(d.o) : g.title;
   const row = (k,v,cls)=> v ? `<div class="dr ${cls||''}"><span>${k}</span><div>${v}</div></div>` : '';
-  const links = s=> (s||'').split(/;\s*/).filter(Boolean).map(u=>/^https?:/.test(u)?`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(u.replace(/^https?:\/\/learn\.microsoft\.com\/(en-us\/)?/,''))}</a>`:esc(u)).join(' · ');
   const expr = s=> (s||'').split(/;\s*/).filter(Boolean).map(x=>{ const i = x.indexOf(':'); return i>0&&i<12 ? `<div class="ex"><b>${esc(x.slice(0,i))}</b>${rich(x.slice(i+1).trim())}</div>` : `<div class="ex">${rich(x)}</div>`; }).join('');
   const sup = rich(f['지원 주체']||'');
   const on = d.o ? sHas(d.g,d.o) : null;
@@ -493,7 +492,7 @@ function renderSimDetail(){
     + row('지원 주체',sup)
     + row('제약 · 주의',rich(f['제약·주의']||''),'warn')
     + row('로그',rich(f['로그']||''))
-    + row('출처',links(f['출처']));
+    + sourcePanelHtml((f['출처']||'').split(/;\s*/).filter(Boolean));
 }
 function renderSimResult(){
   const box = $('#simResult'); if(!box || !SIM.result) return;
