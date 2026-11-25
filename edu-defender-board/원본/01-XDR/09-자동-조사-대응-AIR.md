@@ -3,8 +3,8 @@
 - 설정(Control Plane): Defender for Endpoint 기기 그룹별 자동화 수준
 - 강제(Enforcement): 경고의 관련 아티팩트를 조사하고 설정에 따라 자동 조치 또는 승인 대기
 - 증적(Evidence): 조사 세부 정보 · Action center의 Pending · History
-- 메뉴(Admin Center): Microsoft Defender 포털 > 시스템 > 설정 > Endpoints > Device groups | Action center [확인 필요]
-- 라이선스(License): Defender for Endpoint의 AIR 및 기기 그룹 기능별 플랜·권한 [확인 필요]
+- 메뉴(Admin Center): Microsoft Defender 포털 > 시스템 > 설정 > Endpoints > Device groups | Action center [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
+- 라이선스(License): Defender for Endpoint의 AIR 및 기기 그룹 기능별 플랜·권한 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 설정 확인 → 자동화 수준 → 조사와 조치
 
@@ -38,7 +38,7 @@
    - 해설: 이 예제는 Defender for Endpoint의 기기 조사입니다.
 2. [처리] 기기 그룹 설정을 연다
    - 주체: 관리자
-   - 위치: Defender 포털 › Settings › Endpoints › Device groups [확인 필요]
+   - 위치: Defender 포털 › Settings › Endpoints › Device groups [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 기존 그룹 · 그룹 순서
    - 해설: 기기가 어느 그룹에 속하는지 확인합니다.
 3. [처리] 대상 기기 그룹을 선택한다
@@ -53,7 +53,7 @@
    - 해설: 수준에 따라 악성 아티팩트의 조치가 자동 실행되거나 승인을 기다립니다.
 5. [처리] 조치 승인 권한을 확인한다
    - 주체: 관리자
-   - 위치: Defender 포털 › 권한 · Action center [확인 필요]
+   - 위치: Defender 포털 › 권한 · Action center [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 보안 운영자의 승인 권한
    - 해설: 승인 대기 조치를 처리할 담당자를 지정합니다.
 6. [끝] 설정을 저장하고 기기 그룹 적용을 확인한다
@@ -62,7 +62,7 @@
    - 데이터: 그룹 규칙 · 자동화 수준
    - 해설: 설정된 수준과 실제 조사 결과를 별도로 확인합니다.
 
-#### L4 · ② 활성 — 조사 결과의 조치를 추적한다
+#### L4 · ▶ ② 활성 — 조사 결과의 조치를 추적한다
 
 1. [시작] 지원되는 기기 경고로 자동 조사가 시작된다
    - 주체: Defender for Endpoint
@@ -95,7 +95,7 @@
 - 시나리오: 자동 실행 :: 자동 대응 이력과 성공 여부 확인
 - 시나리오: 승인 대기 :: 대기 중 조치의 영향 검토와 승인
 
-> 주의: AIR 자동화 수준과 기능별 라이선스, 메일 조사의 동작은 제품마다 다르므로 [확인 필요].
+> 주의: AIR 자동화 수준과 기능별 라이선스, 메일 조사의 동작은 제품마다 다르므로 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조].
 > 출처: https://learn.microsoft.com/en-us/defender-endpoint/automation-levels
 > 출처: https://learn.microsoft.com/en-us/defender-endpoint/configure-automated-investigations-remediation
 

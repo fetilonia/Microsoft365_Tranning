@@ -12,6 +12,7 @@
 > 주의: 원격 잠금은 초기화가 아니며, PIN이나 암호가 없는 경우 화면만 꺼지고 접근이 가능할 수 있습니다.
 > 출처: https://learn.microsoft.com/en-us/intune/device-management/actions/remote-lock
 > 출처: https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/overview
+> 확인일: 2026-11-25
 
 #### L4 · ⓪ 비활성 — 담당자에게 원격 잠금 권한이 없다
 
@@ -105,6 +106,7 @@
 > 교육 포인트: 역할 권한, 범위 그룹, 태그와 플랫폼 지원을 함께 확인합니다. 작업 요청이 접수됐다는 것과 기기가 잠겼다는 것은 다릅니다.
 > 출처: https://learn.microsoft.com/en-us/intune/device-management/actions/remote-lock
 > 출처: https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/overview
+> 확인일: 2026-11-25
 
 #### L4 · ▶ iPad 원격 잠금 — 권한과 명령 수신을 확인한다
 
@@ -148,8 +150,9 @@
 > 주의: Android와 iOS/iPadOS에서 앱 선택적 초기화에는 앱 보호 정책 배포가 필요합니다. 요청이 대기 중이면 삭제 완료라고 판단하지 않습니다.
 > 출처: https://learn.microsoft.com/en-us/intune/app-management/protection/wipe-corporate-data
 > 출처: https://learn.microsoft.com/en-us/intune/device-management/actions/
+> 확인일: 2026-11-25
 
-#### L4 · ▶ 보호 앱 회사 데이터 제거 — 앱 요청과 처리 결과 확인
+#### L4 · 보호 앱 회사 데이터 제거 — 앱 요청과 처리 결과 확인
 
 1. [시작] 관리자가 사용자의 회사 앱 데이터를 제거하기로 결정한다
    - 주체: 관리자

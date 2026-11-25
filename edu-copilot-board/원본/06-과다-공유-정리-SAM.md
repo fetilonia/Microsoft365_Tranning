@@ -4,7 +4,7 @@
 - 강제(Enforcement): RCD는 조직 전체 검색·Copilot 검색 노출 제한 | RAC는 별도의 사이트 접근 통제
 - 증적(Evidence): 공유 및 액세스 거버넌스 보고서 | Get-SPOSite의 RestrictContentOrgWideSearch
 - 메뉴(Admin Center): SharePoint 관리 센터 > 사이트 > 활성 사이트 > 설정
-- 라이선스(License): RCD는 Copilot 라이선스와 SharePoint Advanced Management의 전제 조건 확인 | 보고서·RAC별 SKU와 역할 [확인 필요]
+- 라이선스(License): RCD는 Copilot 라이선스와 SharePoint Advanced Management의 전제 조건 확인 | 보고서·RAC별 SKU와 역할 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 공유 상태 확인 → 검색 제한 → 권한 정리
 
@@ -98,7 +98,7 @@
 
 ### L3 · A · 공유 조사와 노출 축소 — 검색과 접근의 차이
 
-#### L4 · 공유 범위 검토 — RCD와 직접 접근을 비교
+#### L4 · ▶ 공유 범위 검토 — RCD와 직접 접근을 비교
 
 1. [시작] 관리자가 과다 공유가 우려되는 사이트를 조사
    - 주체: 관리자
@@ -142,6 +142,6 @@
 - 시나리오: 적용됨 ▸ 없음 :: 검색 제한 및 원본 접근 권한 없음
 - 시나리오: 미적용 :: 제한 미적용 또는 전파 상태 확인
 
-> 주의: RAC 적용 시의 그룹 및 예외 조건은 별도 제품 문서와 테넌트 설정으로 [확인 필요]. RCD를 권한 제거의 대체 수단으로 설명하지 않습니다.
+> 주의: RAC 적용 시의 그룹 및 예외 조건은 별도 제품 문서와 테넌트 설정으로 [확인 필요: 대상 구독·테넌트·리전의 설정과 권한을 공식 절차 및 실제 관리자 화면에서 확인]. RCD를 권한 제거의 대체 수단으로 설명하지 않습니다.
 > 출처: https://learn.microsoft.com/en-us/sharepoint/restricted-content-discovery
 > 출처: https://learn.microsoft.com/en-us/sharepoint/data-access-governance-reports

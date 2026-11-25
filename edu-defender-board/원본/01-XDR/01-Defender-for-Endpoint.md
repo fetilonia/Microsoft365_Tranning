@@ -4,7 +4,7 @@
 - 강제(Enforcement): 온보딩된 기기의 센서가 EDR 신호를 제공 | Defender 바이러스 백신의 ASR 규칙이 설정된 모드로 동작
 - 증적(Evidence): Intune 정책별 기기·설정 상태 | Defender 디바이스 인벤토리 · ASR 이벤트
 - 메뉴(Admin Center): Microsoft Defender 포털 > 시스템 > 설정 > 엔드포인트 > 온보딩 | Intune 관리 센터 > 엔드포인트 보안
-- 라이선스(License): Defender for Endpoint와 Intune의 해당 사용 권한 필요; Intune은 별도 제품 | ASR 보고·고급 기능의 플랜별 권한 [확인 필요]
+- 라이선스(License): Defender for Endpoint와 Intune의 해당 사용 권한 필요; Intune은 별도 제품 | ASR 보고·고급 기능의 플랜별 권한 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 미온보딩 → 정책 할당 → 기기 신호 확인
 
@@ -32,7 +32,7 @@
 
 1. [시작] Intune과 Defender 연결 및 권한을 확인한다
    - 주체: 관리자
-   - 위치: Intune 관리 센터 › 테넌트 관리 › 커넥터 및 토큰 › Microsoft Defender for Endpoint [확인 필요]
+   - 위치: Intune 관리 센터 › 테넌트 관리 › 커넥터 및 토큰 › Microsoft Defender for Endpoint [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: Intune 구독 · Endpoint Security Manager 또는 동등 권한 · 연결 상태
    - 해설: Intune 등록 Windows 기기와 두 제품의 연결이 이 예제의 전제입니다.
 2. [처리] 테스트 기기 그룹을 준비한다
@@ -61,7 +61,7 @@
    - 데이터: 적용 성공 · 충돌 · 오류
    - 해설: 성공 여부와 설정별 충돌을 확인한 다음 운영 범위를 넓힙니다.
 
-#### L4 · ② 활성 — 온보딩 상태와 ASR 적용을 확인한다
+#### L4 · ▶ ② 활성 — 온보딩 상태와 ASR 적용을 확인한다
 
 1. [시작] 테스트 기기가 Intune에 체크인한다
    - 주체: Windows 기기
@@ -94,7 +94,7 @@
 - 시나리오: 실패 또는 대기 :: 정책 오류 또는 체크인 대기 진단
 
 > 교육 포인트: ASR 모드는 EDR 온보딩 성공과 별도 설정이다. 원고의 예는 Windows와 Intune에 한정한다.
-> 주의: 실제 포털 메뉴와 이벤트 종류·기능별 라이선스는 환경과 플랜에 따라 [확인 필요].
+> 주의: 실제 포털 메뉴와 이벤트 종류·기능별 라이선스는 환경과 플랜에 따라 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조].
 > 출처: https://learn.microsoft.com/en-us/defender-endpoint/onboarding-endpoint-manager
 
 ### L3 · A · ASR 감사와 차단 — 같은 규칙의 서로 다른 결과

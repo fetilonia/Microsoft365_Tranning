@@ -62,7 +62,7 @@
    - 데이터: 플랜 및 스캔 상태
    - 해설: 데이터 수집과 평가를 거친 후 결과를 확인합니다.
 
-#### L4 · ② 활성 — 취약성으로 이어지는 경로를 조사한다
+#### L4 · ▶ ② 활성 — 취약성으로 이어지는 경로를 조사한다
 
 1. [시작] Defender CSPM이 자산과 보안 상태를 수집한다
    - 주체: Defender for Cloud
@@ -95,7 +95,7 @@
 - 시나리오: 확인됨 :: 공격 경로의 취약점과 수정 대상을 조사
 - 시나리오: 누락 :: 스캔 미활성 또는 권한 부족을 점검
 
-> 주의: 스캔 지원 자산·리전·과금 단위 및 실제 메뉴는 [확인 필요].
+> 주의: 스캔 지원 자산·리전·과금 단위 및 실제 메뉴는 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/tutorial-enable-cspm-plan
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/how-to-manage-attack-path
 
