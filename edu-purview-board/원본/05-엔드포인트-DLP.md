@@ -106,9 +106,9 @@
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-configure-endpoint-settings
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
 
-### L3 · A · 도메인별 업로드 — 대표 시나리오: 제한 도메인과 다른 도메인 비교
+### L3 · A · 도메인별 업로드
 
-#### L4 · ▶ 동일 민감 파일의 대상 비교 — 도메인 목록에 따른 정책 차이
+#### L4 · 동일 민감 파일의 대상 비교 — 도메인 목록에 따른 정책 차이
 
 1. [시작] 온보딩된 기기에서 동일한 파일 준비
    - 주체: 사용자

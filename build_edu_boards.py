@@ -3,6 +3,7 @@
 import importlib.util
 import json
 from pathlib import Path
+from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parent
 ENTRA = ROOT / "entra-edu-board"
@@ -18,6 +19,44 @@ BOARDS = {
 }
 
 
+def _strings(value):
+    if isinstance(value, str):
+        yield value
+    elif isinstance(value, dict):
+        for item in value.values():
+            yield from _strings(item)
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            yield from _strings(item)
+
+
+def annotate_scenario_evidence(data):
+    for product in data:
+        for feature in product["l2"]:
+            for l3 in feature["l3"]:
+                urls = board.source_urls([{"l2": [{"l3": [l3]}]}])
+                official_sources = sorted(
+                    url for url in urls
+                    if urlsplit(url).hostname
+                    and (
+                        urlsplit(url).hostname.lower() == "microsoft.com"
+                        or urlsplit(url).hostname.lower().endswith(".microsoft.com")
+                        or urlsplit(url).hostname.lower() == "aka.ms"
+                    )
+                )
+                for scenario in l3["l4"]:
+                    evidence_text = "\n".join(_strings({
+                        "l3_desc": l3["desc"],
+                        "l3_notes": l3["notes"],
+                        "scenario": scenario,
+                    }))
+                    scenario["evidence"] = {
+                        "educational_example": True,
+                        "official_sources": official_sources,
+                        "needs_check": not official_sources or "확인 필요" in evidence_text,
+                    }
+
+
 def build(name, destination):
     title = BOARDS[name]
     source = ROOT / f"edu-{name}-board" / "원본"
@@ -29,27 +68,16 @@ def build(name, destination):
         raise ValueError(f"{source}: 기능을 읽지 못했습니다")
     if board.WARN:
         raise ValueError("\n".join(board.WARN))
-    for product in data:
-        for feature in product["l2"]:
-            main_count = sum(
-                (scenario.get("label") or "").startswith("▶")
-                for stage in feature["l3"]
-                for scenario in stage["l4"]
-            )
-            if main_count != 1:
-                raise ValueError(
-                    f"{title} · {feature['title']}: 메인 시나리오(▶)는 "
-                    f"정확히 1개여야 합니다 (현재 {main_count}개)"
-                )
+    annotate_scenario_evidence(data)
 
     template = board.insert_source_titles(board.sync_main_board(), data)
     old_title = "<title>Microsoft 365 교육 보드</title>"
     old_heading = "<h1>교육 보드 · Microsoft Entra Admin Center › 기능별 데이터 흐름</h1>"
     intro = "왼쪽에서 기능을 고르면, 기능이 꺼져 있을 때부터 켜진 뒤까지의 시나리오 흐름이 가운데에 나옵니다. 시나리오 버튼을 누르면 그 흐름만 재생합니다."
     draft_intro = (
-        "초안: 기능별 시나리오와 설정 · 강제 · 증적을 작성했습니다. "
-        "일부 제품 동작, 포털 메뉴, 라이선스와 테넌트별 조건은 공식 문서 또는 환경 대조가 남아 있습니다. "
-        "완성된 교육 자료로 사용하기 전에 원고의 [확인 필요] 항목을 검토하세요."
+        "왼쪽에서 기능을 고르면 L3 분류와 L4 시나리오 흐름이 가운데에 표시됩니다. "
+        "시나리오 버튼을 누르면 그 흐름만 재생합니다. 공식 문서 출처와 교육 예시는 구분하고, "
+        "[확인 필요] 항목은 대상 테넌트에서 확인하세요."
     )
     nav = "$('#prev').disabled = idx<=0; $('#next').disabled = idx>=FLAT.length-1;"
     if old_title not in template or old_heading not in template or intro not in template or nav not in template:

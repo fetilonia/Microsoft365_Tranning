@@ -105,7 +105,7 @@
 > 출처: https://learn.microsoft.com/en-us/intune/epm/manage-elevation-settings
 > 출처: https://learn.microsoft.com/en-us/intune/epm/manage-support-approvals
 
-#### L4 · ▶ 승인된 파일 상승 — 일치 여부와 승인 결정을 확인한다
+#### L4 · 승인된 파일 상승 — 일치 여부와 승인 결정을 확인한다
 
 1. [시작] 표준 사용자가 Run with elevated access를 선택한다
    - 주체: 사용자

@@ -106,9 +106,9 @@
 > 출처: https://learn.microsoft.com/en-us/purview/edisc-search-copilot-data
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
 
-### L3 · A · 활동과 콘텐츠 — 대표 시나리오: Copilot 활동 조사
+### L3 · A · 활동과 콘텐츠
 
-#### L4 · ▶ Audit 이벤트와 eDiscovery 콘텐츠 비교 — 목적에 맞는 검색 선택
+#### L4 · Audit 이벤트와 eDiscovery 콘텐츠 비교 — 목적에 맞는 검색 선택
 
 1. [시작] 조사자가 Copilot 사용 사례 확인 요청
    - 주체: 조사자

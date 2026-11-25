@@ -108,7 +108,7 @@
 > 출처: https://learn.microsoft.com/en-us/intune/fundamentals/role-based-access-control/overview
 > 확인일: 2026-11-25
 
-#### L4 · ▶ iPad 원격 잠금 — 권한과 명령 수신을 확인한다
+#### L4 · iPad 원격 잠금 — 권한과 명령 수신을 확인한다
 
 1. [시작] 담당자가 암호가 있는 관리 iPad를 선택한다
    - 주체: 관리자

@@ -104,7 +104,7 @@
 > 주의: 신호 누락 시 정확한 상태와 전파 시간은 플랫폼·환경별 [확인 필요: 대상 구독·테넌트·리전의 설정과 권한을 공식 절차 및 실제 관리자 화면에서 확인]이며, 누락을 안전한 상태로 간주하지 않습니다.
 > 출처: https://learn.microsoft.com/en-us/intune/device-security/microsoft-defender/configure-integration
 
-#### L4 · ▶ MDE 위험 기반 준수 — 온보딩과 위험을 확인한다
+#### L4 · MDE 위험 기반 준수 — 온보딩과 위험을 확인한다
 
 1. [시작] 관리자가 Low 위험 기준 준수 정책을 할당한다
    - 주체: 관리자

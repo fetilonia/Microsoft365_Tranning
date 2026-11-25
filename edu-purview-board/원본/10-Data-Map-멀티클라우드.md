@@ -104,9 +104,9 @@
 > 출처: https://learn.microsoft.com/en-us/purview/data-map-scan-data-sources
 > 출처: https://learn.microsoft.com/en-us/purview/data-map-data-sources
 
-### L3 · A · 전체·증분 스캔 — 대표 시나리오: 지원 원본의 스캔 방식 비교
+### L3 · A · 전체·증분 스캔
 
-#### L4 · ▶ 전체 스캔과 증분 스캔 선택 — 원본별 지원을 먼저 확인
+#### L4 · 전체 스캔과 증분 스캔 선택 — 원본별 지원을 먼저 확인
 
 1. [시작] 기존 등록 원본과 이전 스캔 확인
    - 주체: 관리자
