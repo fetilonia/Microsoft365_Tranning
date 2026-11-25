@@ -100,18 +100,19 @@
 - 시나리오: 일치 :: 지원 기기에서 민감 텍스트 붙여넣기 차단
 - 시나리오: 불일치 :: 기기·경로·조건을 확인해 미적용 원인 조사
 
-> 주의: 기기·브라우저·네트워크 경로는 별도 전제가 있습니다. AIAppInteraction의 정확한 감사 필드와 해당 경로 지원은 [확인 필요].
+> 주의: 기기·브라우저·네트워크 경로는 별도 전제가 있습니다. AIAppInteraction의 정확한 감사 필드와 해당 경로 지원은 [확인 필요: 기능별 이벤트·보고 필드, 필요한 감사 설정과 역할을 대상 테넌트의 Activity explorer·감사·경고에서 확인].
 > 출처: https://learn.microsoft.com/en-us/purview/ai-other-apps
 > 출처: https://learn.microsoft.com/en-us/purview/endpoint-dlp-getting-started
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
+> 확인일: 2026-11-25
 
 ### L3 · A · 기기와 네트워크 경로 — 대표 시나리오: AI 전송 경로별 통제 확인
 
-#### L4 · 지원 기기 경로와 네트워크 경로 비교 — 다른 강제 지점을 구별
+#### L4 · ▶ 지원 기기 경로와 네트워크 경로 비교 — 다른 강제 지점을 구별
 
 1. [시작] 관리자가 AI 사이트 전송 사례 확인
    - 주체: 관리자
-   - მონაცემ: 텍스트 또는 파일의 전송 경로
+   - 데이터: 텍스트 또는 파일의 전송 경로
    - 해설: 하나의 정책이 모든 경로를 보호한다고 가정하지 않습니다.
 2. [처리] Endpoint DLP의 온보딩과 대상 확인
    - 주체: 관리자
@@ -144,3 +145,4 @@
 
 > 출처: https://learn.microsoft.com/en-us/purview/ai-other-apps
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-create-policy-ai-network-data-security
+> 확인일: 2026-11-25

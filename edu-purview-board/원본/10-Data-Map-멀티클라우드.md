@@ -106,7 +106,7 @@
 
 ### L3 · A · 전체·증분 스캔 — 대표 시나리오: 지원 원본의 스캔 방식 비교
 
-#### L4 · 전체 스캔과 증분 스캔 선택 — 원본별 지원을 먼저 확인
+#### L4 · ▶ 전체 스캔과 증분 스캔 선택 — 원본별 지원을 먼저 확인
 
 1. [시작] 기존 등록 원본과 이전 스캔 확인
    - 주체: 관리자
@@ -143,6 +143,6 @@
 - 시나리오: 전체 :: 선택 범위 전체를 다시 스캔
 
 > 교육 포인트: 스캔 결과는 거버넌스 자산 정보이며 그 자체로 DLP 공유 차단을 뜻하지 않습니다.
-> 주의: S3·Snowflake·SQL Server 각각의 증분·런타임·인증·가격 [확인 필요].
+> 주의: S3·Snowflake·SQL Server 각각의 증분·런타임·인증·가격 [확인 필요: 기능·플랫폼·정책 모드별 동작을 최신 Microsoft Learn 및 격리된 테스트 테넌트에서 재현해 확인].
 > 출처: https://learn.microsoft.com/en-us/purview/data-map-scan-data-sources
 > 출처: https://learn.microsoft.com/en-us/purview/data-map-data-sources

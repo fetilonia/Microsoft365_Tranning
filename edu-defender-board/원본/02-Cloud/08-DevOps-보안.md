@@ -3,8 +3,8 @@
 - 설정(Control Plane): Azure 구독에 GitHub 커넥터 생성 | 조직 권한 부여와 Defender for Cloud GitHub 앱 설치
 - 강제(Enforcement): 연결된 리포지토리와 보안 결과를 수집 | 지원되는 코드-클라우드 맥락 연결
 - 증적(Evidence): DevOps security · 인벤토리 · 리포지토리별 보안 권장 사항
-- 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Add environment > GitHub [확인 필요]
-- 라이선스(License): 기본 및 고급 DevOps 보안 기능의 플랜, GitHub Advanced Security 조건·비용 [확인 필요]
+- 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Add environment > GitHub [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
+- 라이선스(License): 기본 및 고급 DevOps 보안 기능의 플랜, GitHub Advanced Security 조건·비용 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 연결 전 → GitHub 연결 → 리포지토리 조사
 
@@ -38,7 +38,7 @@
    - 해설: 구독의 커넥터 생성과 조직 앱 설치에 필요한 권한을 확인합니다.
 2. [처리] GitHub 환경 추가를 연다
    - 주체: 관리자
-   - 위치: Defender for Cloud › Environment settings › Add environment › GitHub [확인 필요]
+   - 위치: Defender for Cloud › Environment settings › Add environment › GitHub [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 커넥터 이름 · 구독 · 리소스 그룹
    - 해설: Azure 구독에 GitHub 연결을 저장합니다.
 3. [처리] GitHub 접근을 승인한다
@@ -62,7 +62,7 @@
    - 데이터: 커넥터 상태 · 조직 · 리포지토리
    - 해설: 리소스가 나타나기까지 지연될 수 있습니다.
 
-#### L4 · ② 활성 — 연결된 리포지토리의 보안 결과를 확인한다
+#### L4 · ▶ ② 활성 — 연결된 리포지토리의 보안 결과를 확인한다
 
 1. [시작] Defender for Cloud가 GitHub 조직에 접근한다
    - 주체: Defender for Cloud
@@ -94,7 +94,7 @@
 - 시나리오: 표시 :: 리포지토리의 보안 결과와 권장 사항 확인
 - 시나리오: 미표시 :: 앱 권한과 초기 수집 지연 점검
 
-> 주의: GitHub 플랜·스캔 종류·코드-클라우드 매핑과 PR 주석의 지원 조건은 [확인 필요].
+> 주의: GitHub 플랜·스캔 종류·코드-클라우드 매핑과 PR 주석의 지원 조건은 [확인 필요: 기능·플랫폼·정책 모드별 동작을 최신 Microsoft Learn 및 격리된 테스트 테넌트에서 재현해 확인].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/quickstart-onboard-github
 
 ### L3 · A · 코드와 런타임 — 맥락 연결의 조건

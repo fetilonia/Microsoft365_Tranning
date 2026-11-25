@@ -4,7 +4,7 @@
 - 강제(Enforcement): 지원 레지스트리의 이미지 취약성 평가와 구성된 런타임 위협 탐지
 - 증적(Evidence): 이미지 취약성 권장 사항 · 클러스터 보안 경고
 - 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Defender plans > Containers
-- 라이선스(License): Defender for Containers 유료 플랜 또는 지원되는 CSPM 시나리오; 구성 요소·과금 범위 [확인 필요]
+- 라이선스(License): Defender for Containers 유료 플랜 또는 지원되는 CSPM 시나리오; 구성 요소·과금 범위 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 미구성 → 플랜 구성 → 이미지 조사
 
@@ -61,7 +61,7 @@
    - 데이터: 플랜 · 구성 요소 적용 상태
    - 해설: 플랜 활성화와 개별 구성 요소의 적용을 따로 검증합니다.
 
-#### L4 · ② 활성 — 레지스트리 이미지 취약성을 평가한다
+#### L4 · ▶ ② 활성 — 레지스트리 이미지 취약성을 평가한다
 
 1. [시작] 지원 레지스트리에 이미지가 저장된다
    - 주체: 개발자
@@ -93,7 +93,7 @@
 - 시나리오: 평가됨 :: 이미지 취약성과 수정 대상을 확인
 - 시나리오: 미평가 :: 레지스트리 접근 및 지원 범위 조사
 
-> 주의: 클러스터 종류별 센서·API 요구 조건, 지원 리전과 비용은 [확인 필요].
+> 주의: 클러스터 종류별 센서·API 요구 조건, 지원 리전과 비용은 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-containers-enable-plan
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/agentless-vulnerability-assessment-azure
 

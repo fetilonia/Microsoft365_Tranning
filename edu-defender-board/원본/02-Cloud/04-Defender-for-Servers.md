@@ -4,7 +4,7 @@
 - 강제(Enforcement): 지원 기기의 엔드포인트 보호 및 플랜별 스캔 | 에이전트와 에이전트 없는 경로를 구분
 - 증적(Evidence): 서버 인벤토리 · 보안 경고 · 취약성 권장 사항
 - 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Defender plans > Servers
-- 라이선스(License): Defender for Servers P1 또는 P2 과금 | 플랜별 대상·기능·비용 [확인 필요]
+- 라이선스(License): Defender for Servers P1 또는 P2 과금 | 플랜별 대상·기능·비용 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 보호 범위 확인 → 플랜 구성 → 서버 조사
 
@@ -33,7 +33,7 @@
 1. [시작] 관리자가 구독과 대상 서버를 확인한다
    - 주체: 관리자
    - 위치: Azure portal › 구독
-   - 데이터: 구독 · 서버 수 · 관리자 권한 [확인 필요]
+   - 데이터: 구독 · 서버 수 · 관리자 권한 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
    - 해설: 서버 수와 과금 범위를 검토합니다.
 2. [처리] Defender for Cloud의 환경 설정을 연다
    - 주체: 관리자
@@ -47,7 +47,7 @@
    - 해설: 요구하는 기능과 비용에 따라 플랜을 선택합니다.
 4. [처리] Defender for Endpoint 통합을 검토한다
    - 주체: 관리자
-   - 위치: Servers 플랜 설정 › Defender for Endpoint 통합 [확인 필요]
+   - 위치: Servers 플랜 설정 › Defender for Endpoint 통합 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 통합 상태 · 지원 서버
    - 해설: 센서 기반 보호의 온보딩 조건을 확인합니다.
 5. [처리] P2의 에이전트 없는 스캔을 검토한다
@@ -61,7 +61,7 @@
    - 데이터: 서버 목록 · 플랜 상태
    - 해설: 플랜 저장 후 온보딩 및 스캔 결과를 확인합니다.
 
-#### L4 · ② 활성 — 서버의 보호 및 취약성 결과를 조사한다
+#### L4 · ▶ ② 활성 — 서버의 보호 및 취약성 결과를 조사한다
 
 1. [시작] Defender for Cloud가 구독의 서버를 식별한다
    - 주체: Defender for Cloud
@@ -94,7 +94,7 @@
 - 시나리오: 정상 :: 서버 경고와 취약성 결과 확인
 - 시나리오: 누락 :: 서버 온보딩과 스캔 공백 조사
 
-> 주의: P1/P2의 세부 기능, 서버별 과금 및 운영체제 지원은 [확인 필요].
+> 주의: P1/P2의 세부 기능, 서버별 과금 및 운영체제 지원은 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/plan-defender-for-servers-select-plan
 
 ### L3 · A · 스캔 경로 — 센서와 에이전트 없는 검사

@@ -101,10 +101,11 @@
 > 주의: 프롬프트 차단은 미리 보기입니다. 프롬프트에 직접 첨부한 파일 내용은 이 DLP 텍스트 검사에서 스캔하지 않습니다.
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
+> 확인일: 2026-11-25
 
 ### L3 · A · 동작별 차이 — 대표 시나리오: 민감 프롬프트의 외부 웹 검색 제한
 
-#### L4 · 웹 검색과 전체 처리 제한 비교 — 같은 SIT에 다른 동작 지정
+#### L4 · ▶ 웹 검색과 전체 처리 제한 비교 — 같은 SIT에 다른 동작 지정
 
 1. [시작] SIT에 일치하는 가상 프롬프트 준비
    - 주체: 관리자
@@ -138,6 +139,7 @@
 
 > 교육 포인트: 레이블로 지정한 파일·이메일은 처리에서 제외되어도 인용에 표시될 수 있습니다. 외부 발신 메일 제외는 미리 보기이며 Cowork는 아직 지원하지 않습니다.
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about
+> 확인일: 2026-11-25
 
 ### L3 · B · 레이블 항목 처리 — 근거에서 제외되는 파일과 이메일
 
@@ -176,6 +178,7 @@
 
 > 주의: 레이블 조건의 이메일은 2025-01-01 이후 발송된 항목을 지원하며 일정 초대는 지원하지 않습니다. 열린 Word·Excel·PowerPoint 문서에는 추가 앱 경험 제한이 있습니다.
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about
+> 확인일: 2026-11-25
 
 ### L3 · C · 외부 발신 메일 — 미리 보기의 근거 제한
 
@@ -213,3 +216,4 @@
 - 시나리오: 내부 :: 내부 발신 메일에는 이 외부 조건 미적용
 
 > 출처: https://learn.microsoft.com/en-us/purview/dlp-microsoft365-copilot-location-learn-about
+> 확인일: 2026-11-25

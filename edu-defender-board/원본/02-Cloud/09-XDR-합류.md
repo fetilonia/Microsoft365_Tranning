@@ -4,7 +4,7 @@
 - 강제(Enforcement): 지원되는 Cloud 경고가 XDR에 수집되어 인시던트에 포함·상관
 - 증적(Evidence): Cloud 원본 경고 · Defender XDR 경고 및 인시던트 · 경고 상태
 - 메뉴(Admin Center): Azure portal > Defender for Cloud > Security alerts | Microsoft Defender 포털 > Incidents & alerts
-- 라이선스(License): Defender for Cloud와 Defender XDR 통합의 테넌트·플랜·권한 조건 [확인 필요]
+- 라이선스(License): Defender for Cloud와 Defender XDR 통합의 테넌트·플랜·권한 조건 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 연동 확인 → 조사 준비 → 경고 대조
 
@@ -37,7 +37,7 @@
    - 해설: 경고를 생성할 보호 대상과 구독을 확인합니다.
 2. [처리] Defender XDR 연동 상태를 점검한다
    - 주체: 관리자
-   - 위치: Defender for Cloud › 환경 설정 · 통합 설정 [확인 필요]
+   - 위치: Defender for Cloud › 환경 설정 · 통합 설정 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: Cloud와 XDR의 연동 상태
    - 해설: 기본 연동 여부와 환경별 설정 경로를 확인합니다.
 3. [처리] 운영자의 두 포털 접근을 확인한다
@@ -61,7 +61,7 @@
    - 데이터: 원본 및 수신 경고 상태
    - 해설: 동일 경고와 관련 인시던트의 관계를 검토합니다.
 
-#### L4 · ② 활성 — Cloud 경고가 XDR에 표시되는지 대조한다
+#### L4 · ▶ ② 활성 — Cloud 경고가 XDR에 표시되는지 대조한다
 
 1. [시작] Defender for Cloud가 리소스의 위협 경고를 만든다
    - 주체: Defender for Cloud
@@ -88,12 +88,12 @@
    - 해설: 지원되는 Cloud 경고의 상태 동기화 조건을 확인합니다.
 6. [끝] 연동과 데이터 범위를 조사한다
    - 주체: 관리자
-   - 데이터: 테넌트 · 구독 권한 · 연동 상태 · 수집 지연 [확인 필요]
+   - 데이터: 테넌트 · 구독 권한 · 연동 상태 · 수집 지연 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
    - 해설: XDR 표시 공백을 Cloud 위협이 없다는 증거로 해석하지 않습니다.
 - 시나리오: 확인됨 :: Cloud 경고와 XDR 인시던트 대조
 - 시나리오: 미표시 :: 연동과 접근 범위 및 지연 점검
 
-> 주의: 제품별 경고 유형에 따른 상태 동기화 예외와 연동 기본값은 [확인 필요].
+> 주의: 제품별 경고 유형에 따른 상태 동기화 예외와 연동 기본값은 [확인 필요: 기능별 이벤트·보고 필드, 필요한 감사 설정과 역할을 대상 테넌트의 Activity explorer·감사·경고에서 확인].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/concept-integration-365
 
 ### L3 · A · 경고 상태 동기화 — 원본별 차이 확인

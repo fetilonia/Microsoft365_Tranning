@@ -3,8 +3,8 @@
 - 설정(Control Plane): Storage 플랜과 업로드 시 멀웨어 검사 활성화 | 월별 검사 한도와 제외 필터 검토
 - 강제(Enforcement): 지원되는 Blob 업로드·수정 시 서비스 측 멀웨어 검사
 - 증적(Evidence): 검사 결과 · Blob 인덱스 태그 · 악성 파일의 보안 경고
-- 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Defender plans > Storage [확인 필요]
-- 라이선스(License): Defender for Storage 유료 플랜 및 검사량 기반 비용·한도 [확인 필요]
+- 메뉴(Admin Center): Azure portal > Defender for Cloud > Environment settings > Defender plans > Storage [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
+- 라이선스(License): Defender for Storage 유료 플랜 및 검사량 기반 비용·한도 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 검사 미활성 → 설정 → 업로드 결과
 
@@ -33,7 +33,7 @@
 1. [시작] 대상 구독과 스토리지 계정을 확인한다
    - 주체: 관리자
    - 위치: Azure portal › 구독 · 스토리지 계정
-   - 데이터: 계정 · 리소스 범위 · 권한 [확인 필요]
+   - 데이터: 계정 · 리소스 범위 · 권한 [확인 필요: 대상 테넌트에서 해당 데이터 필드·수집 조건·정책 결과를 기록 또는 보고서와 대조]
    - 해설: 보호 범위와 비용을 함께 검토합니다.
 2. [처리] Storage 플랜 설정을 연다
    - 주체: 관리자
@@ -42,26 +42,26 @@
    - 해설: 대상 구독 또는 스토리지 계정의 적용을 확인합니다.
 3. [처리] 업로드 시 멀웨어 검사를 켠다
    - 주체: 관리자
-   - 위치: Storage › Malware scanning › On-upload scanning [확인 필요]
+   - 위치: Storage › Malware scanning › On-upload scanning [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 검사 활성 상태
    - 해설: 지원 Blob의 업로드 또는 수정 시 검사합니다.
 4. [처리] 월별 검사 한도를 검토한다
    - 주체: 관리자
-   - 위치: Malware scanning › 검사량 한도 [확인 필요]
+   - 위치: Malware scanning › 검사량 한도 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 스토리지 계정별 월간 GB 한도
    - 해설: 한도에 도달하면 해당 월의 이후 파일은 검사되지 않을 수 있습니다.
 5. [처리] 제외 필터와 결과 전달을 검토한다
    - 주체: 관리자
-   - 위치: Malware scanning › 필터 · 결과 설정 [확인 필요]
+   - 위치: Malware scanning › 필터 · 결과 설정 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 제외 조건 · 결과 경로
    - 해설: 제외 조건은 검사 공백이 될 수 있으므로 명시적으로 검토합니다.
 6. [끝] 스캔 인프라와 계정 상태를 확인한다
    - 주체: 관리자
-   - 위치: 스토리지 계정 › Event Grid 시스템 토픽 · ID [확인 필요]
+   - 위치: 스토리지 계정 › Event Grid 시스템 토픽 · ID [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 시스템 토픽 · 관리 ID
    - 해설: 시스템 토픽을 제거하면 업로드 검사가 작동하지 않습니다.
 
-#### L4 · ② 활성 — Blob 업로드와 검사 결과를 확인한다
+#### L4 · ▶ ② 활성 — Blob 업로드와 검사 결과를 확인한다
 
 1. [시작] 지원되는 Blob이 업로드되거나 수정된다
    - 주체: 사용자
@@ -93,7 +93,7 @@
 - 시나리오: 악성 :: 검사 완료 후 악성 경고 확인
 - 시나리오: 악성 아님 :: 검사 완료 결과와 Blob 태그 확인
 
-> 주의: 암호화·크기·처리량·한도·타임아웃으로 검사되지 않은 파일은 무해 결과와 다르다. 지원 및 결과 전달 설정은 [확인 필요].
+> 주의: 암호화·크기·처리량·한도·타임아웃으로 검사되지 않은 파일은 무해 결과와 다르다. 지원 및 결과 전달 설정은 [확인 필요: 기능·플랫폼·정책 모드별 동작을 최신 Microsoft Learn 및 격리된 테스트 테넌트에서 재현해 확인].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/on-upload-malware-scanning
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/introduction-malware-scanning
 

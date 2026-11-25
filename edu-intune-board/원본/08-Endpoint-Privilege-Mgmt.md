@@ -4,7 +4,7 @@
 - 강제(Enforcement): Windows의 EPM 구성 요소가 정책과 사용자 상승 요청을 평가하고 지정된 방식으로 실행
 - 증적(Evidence): EPM 상승 보고서 · Elevation requests · Intune 감사 로그
 - 메뉴(Admin Center): Intune 관리 센터 > Endpoint security > Endpoint Privilege Management > Policies · Elevation requests
-- 라이선스(License): Intune Plan 1 또는 Plan 2 외 EPM 추가 구독 필요 | 고객 SKU·사용자 할당 [확인 필요]
+- 라이선스(License): Intune Plan 1 또는 Plan 2 외 EPM 추가 구독 필요 | 고객 SKU·사용자 할당 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — EPM 미사용 → 정책 배포 → 통제된 상승
 

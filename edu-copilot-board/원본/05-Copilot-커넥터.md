@@ -1,10 +1,10 @@
 ## L2 · Copilot 커넥터 — 외부 데이터와 접근 권한
 
-- 설정(Control Plane): 동기화 커넥터의 연결 · 스키마 · 외부 항목 ACL | 외부 그룹 매핑
+- 설정(Control Plane): 동기화 커넥터의 연결 · 스키마 · 외부 항목 ACL | 배포자는 Microsoft 365 관리 센터의 AI administrator 필요
 - 강제(Enforcement): 동기화 콘텐츠의 Graph 인덱싱 및 항목별 접근 제어 | 연합 커넥터는 별도 실시간 검색
 - 증적(Evidence): 연결 상태 · 수집 상태 [확인 필요: 커넥터별 메뉴와 기록]
-- 메뉴(Admin Center): Microsoft 365 관리 센터 > Copilot > 커넥터 [확인 필요: 현재 메뉴]
-- 라이선스(License): Copilot 경험·커넥터별 라이선스와 항목 할당량 · 관리 역할 [확인 필요]
+- 메뉴(Admin Center): Microsoft 365 관리 센터 > Copilot > 커넥터 [확인 필요: 대상 테넌트의 현재 메뉴 이름과 위치]
+- 라이선스(License): Search용 동기화 커넥터는 Microsoft 365 구독 | Copilot grounding은 Microsoft 365 Copilot 추가 기능 | 연합 커넥터는 조회 사용자별 Microsoft 365 Copilot 추가 기능 [확인 필요: 커넥터별 용량·기능과 고객 SKU]
 
 ### L3 · 0 · 기능 상태 전이 — 연결 전 → 연결 구성 → 콘텐츠 사용
 
@@ -31,12 +31,12 @@
 
 1. [시작] 관리자가 동기화할 원본을 선택
    - 주체: 관리자
-   - 위치: Microsoft 365 관리 센터 › Copilot › 커넥터 [확인 필요]
+   - 위치: Microsoft 365 관리 센터 › Copilot › 커넥터 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 원본 서비스 · 연결 유형
    - 해설: 이 예시는 동기화 커넥터를 사용합니다.
 2. [처리] 연결에 필요한 인증을 검토
    - 주체: 관리자
-   - 위치: 커넥터 구성 화면 [확인 필요]
+   - 위치: 커넥터 구성 화면 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 원본 인증 · 앱 등록 · 역할
    - 해설: 선택한 커넥터의 인증과 관리 권한을 확인합니다.
 3. [처리] 외부 연결을 구성
@@ -51,12 +51,12 @@
    - 해설: 사용자 지정 동기화 연결에서는 항목 수집 전에 스키마를 등록합니다.
 5. [처리] 원본 ACL과 외부 그룹을 매핑
    - 주체: 관리자
-   - 위치: 커넥터 권한 매핑 [확인 필요]
+   - 위치: 커넥터 권한 매핑 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 항목 ACL · 외부 그룹
    - 해설: 항목의 원본 접근 권한을 수집 시 올바르게 반영해야 합니다.
 6. [끝] 콘텐츠 수집과 상태를 검토
    - 주체: 관리자
-   - 위치: 커넥터 상태 화면 [확인 필요]
+   - 위치: 커넥터 상태 화면 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: externalItem · 수집 상태
    - 해설: 항목을 수집하고 연결별 상태 및 오류를 확인합니다.
 
@@ -84,17 +84,20 @@
    - 해설: 인용을 통해 사용된 외부 항목을 확인합니다.
 6. [끝] 관리자가 수집과 권한 상태를 검토
    - 주체: 관리자
-   - 위치: 커넥터 관리 화면 [확인 필요]
+   - 위치: 커넥터 관리 화면 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 수집 상태 · 원본 ACL 및 매핑
    - 해설: 누락이나 오래된 결과는 커넥터별 상태와 동기화 조건을 조사합니다.
 
-> 교육 포인트: 연합 커넥터는 Graph 인덱싱 대신 MCP를 이용해 실시간으로 조회하며 인증과 지원 범위가 다릅니다. 확인일 2026-11-24.
+> 교육 포인트: 연합 커넥터는 MCP로 외부 원본을 실시간 질의하고 Microsoft 365에 콘텐츠를 인덱싱하지 않으며, 사용자 권한으로 접근합니다. 동기화 커넥터와 인증·라이선스 전제가 다릅니다.
 > 출처: https://learn.microsoft.com/en-us/plugins/overview-copilot-connector
 > 출처: https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview
+> 출처: https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/prerequisites
+> 출처: https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview
+> 확인일: 2026-11-25
 
 ### L3 · A · 동기화된 외부 문서 조회 — 수집과 ACL 매핑 점검
 
-#### L4 · 외부 항목에 대한 질문 — 수집 상태와 접근 조건 비교
+#### L4 · ▶ 외부 항목에 대한 질문 — 수집 상태와 접근 조건 비교
 
 1. [시작] 사용자가 외부 문서에 관한 질문을 한다
    - 주체: 사용자
@@ -128,12 +131,12 @@
    - 해설: 인용을 선택해 참조한 항목을 확인합니다.
 7. [끝] 관리자가 연결 상태를 검토
    - 주체: 관리자
-   - 위치: 커넥터 관리 화면 [확인 필요]
+   - 위치: 커넥터 관리 화면 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 연결 · 수집 상태
    - 해설: 항목의 수집 상태와 원본 접근 권한을 주기적으로 검토합니다.
 8. [차단] 항목 미수집 — 커넥터 상태와 오류 조사
    - 주체: 관리자
-   - 데이터: 수집 오류 · 동기화 상태 [확인 필요]
+   - 데이터: 수집 오류 · 동기화 상태 [확인 필요: 대상 테넌트에서 해당 데이터 필드·수집 조건·정책 결과를 기록 또는 보고서와 대조]
    - 해설: 실제 지연과 오류 기록의 위치는 커넥터별로 확인합니다.
 9. [차단] ACL 불일치 — 노출 범위를 조사
    - 주체: 관리자
@@ -148,6 +151,9 @@
 - 시나리오: 수집됨 ▸ 불일치 :: 원본과 인덱스의 ACL 불일치 조사
 - 시나리오: 미수집 :: 항목 미수집으로 상태와 오류 조사
 
-> 주의: 원본 권한이 자동으로 항상 그대로 반영된다고 단정하지 않습니다. 외부 그룹·동기 지연과 오류 처리·정확한 로그 경로는 구현별 [확인 필요].
+> 주의: 원본 권한이 자동으로 항상 그대로 반영된다고 단정하지 않습니다. 외부 그룹·동기 지연과 오류 처리·정확한 로그 경로는 구현별 [확인 필요: 기능별 이벤트·보고 필드, 필요한 감사 설정과 역할을 대상 테넌트의 Activity explorer·감사·경고에서 확인].
 > 출처: https://learn.microsoft.com/en-us/plugins/overview-copilot-connector
 > 출처: https://learn.microsoft.com/en-us/graph/connecting-external-content-connectors-api-overview
+> 출처: https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/prerequisites
+> 출처: https://learn.microsoft.com/en-us/microsoft-365/copilot/connectors/federated-connectors-overview
+> 확인일: 2026-11-25

@@ -33,7 +33,7 @@
 1. [시작] 관리자가 Azure 구독과 접근 권한을 확인한다
    - 주체: 관리자
    - 위치: Azure portal › 구독
-   - 데이터: 대상 구독 · 관리자 권한 [확인 필요]
+   - 데이터: 대상 구독 · 관리자 권한 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
    - 해설: 서비스 활성화와 리소스 수정에 필요한 권한은 각각 확인합니다.
 2. [처리] Defender for Cloud를 연다
    - 주체: 관리자
@@ -42,12 +42,12 @@
    - 해설: 보안 점수를 볼 구독 범위를 확인합니다.
 3. [처리] 구독에 Defender for Cloud를 활성화한다
    - 주체: 관리자
-   - 위치: Defender for Cloud › Environment settings › 구독 [확인 필요]
+   - 위치: Defender for Cloud › Environment settings › 구독 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: 구독의 Defender for Cloud 사용 상태
    - 해설: 환경의 구체적 활성화 경로와 권한을 확인합니다.
 4. [처리] MCSB 기본 적용을 확인한다
    - 주체: 관리자
-   - 위치: Defender for Cloud › Environment settings › 구독의 보안 정책 [확인 필요]
+   - 위치: Defender for Cloud › Environment settings › 구독의 보안 정책 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조]
    - 데이터: Microsoft cloud security benchmark 표준
    - 해설: Azure 구독에서 서비스를 켜면 MCSB 표준이 기본 적용됩니다.
 5. [처리] 자산과 구독 필터를 확인한다
@@ -61,7 +61,7 @@
    - 데이터: 평가 상태 · 권장 사항 · Secure score
    - 해설: 수집과 평가가 완료됐는지 확인한 뒤 결과를 해석합니다.
 
-#### L4 · ② 활성 — 권장 사항을 수정하고 재평가를 확인한다
+#### L4 · ▶ ② 활성 — 권장 사항을 수정하고 재평가를 확인한다
 
 1. [시작] Defender for Cloud가 구독 리소스를 평가한다
    - 주체: Defender for Cloud
@@ -99,7 +99,7 @@
 - 시나리오: 미평가 :: 평가 공백의 범위와 지연 조사
 
 > 교육 포인트: Foundational CSPM은 무료이며 유료 Defender CSPM의 공격 경로 분석과 구분한다.
-> 주의: 예제의 Azure 포털 Secure score와 Defender 포털의 Cloud Secure Score는 서로 다른 모델이다. 포털 메뉴·수정 권한은 [확인 필요].
+> 주의: 예제의 Azure 포털 Secure score와 Defender 포털의 Cloud Secure Score는 서로 다른 모델이다. 포털 메뉴·수정 권한은 [확인 필요: 현재 포털 메뉴명과 기능별 경로를 대상 테넌트에서 확인하고 최신 Microsoft Learn 절차와 대조].
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/concept-cloud-security-posture-management
 > 출처: https://learn.microsoft.com/en-us/azure/defender-for-cloud/secure-score-security-controls
 

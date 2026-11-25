@@ -4,7 +4,7 @@
 - 강제(Enforcement): 연결된 Sentinel 기능과 Defender XDR을 함께 사용할 때 통합 인시던트 관리 및 고급 헌팅 제공
 - 증적(Evidence): 연결된 작업 영역 · Sentinel 데이터 · 인시던트 및 헌팅 결과
 - 메뉴(Admin Center): Microsoft Defender 포털 > System > Settings > Microsoft Sentinel > Connect a workspace
-- 라이선스(License): Defender 포털에서 Sentinel을 사용하기 위해 XDR 또는 E5 라이선스는 필수 아님 | Sentinel 사용료와 작업 영역별 권한 [확인 필요]
+- 라이선스(License): Defender 포털에서 Sentinel을 사용하기 위해 XDR 또는 E5 라이선스는 필수 아님 | Sentinel 사용료와 작업 영역별 권한 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조]
 
 ### L3 · 0 · 기능 상태 전이 — 미연결 → 작업 영역 연결 → 통합 조사
 
@@ -61,7 +61,7 @@
    - 데이터: 연결 상태 · 기본 작업 영역
    - 해설: 연결 완료와 데이터 수집 구성을 별도로 검증합니다.
 
-#### L4 · ② 활성 — 연결된 작업 영역의 인시던트를 조사한다
+#### L4 · ▶ ② 활성 — 연결된 작업 영역의 인시던트를 조사한다
 
 1. [시작] 운영자가 Defender 포털에서 인시던트 목록을 연다
    - 주체: 보안 운영자
@@ -94,8 +94,9 @@
 - 시나리오: 접근 가능 :: 연결된 Sentinel 데이터와 인시던트 조사
 - 시나리오: 접근 불가 :: 작업 영역 권한과 수집 공백 점검
 
-> 주의: Sentinel 과금 및 데이터 커넥터별 요구 조건과 통합 지원 범위는 [확인 필요].
+> 주의: Defender XDR 또는 E5 라이선스 없이도 Microsoft Sentinel을 Defender 포털에 연결할 수 있습니다. 작업 영역 과금, 데이터 커넥터별 요구 조건 및 권한은 대상 Azure 구독과 작업 영역에서 [확인 필요: 실제 SKU별 사용 권한과 대상 사용자 조건을 Microsoft Learn 서비스 설명·고객 계약 및 할당된 라이선스에서 대조].
 > 출처: https://learn.microsoft.com/en-us/azure/sentinel/microsoft-sentinel-onboard
+> 확인일: 2026-11-25
 
 ### L3 · A · 권한 경계 — 보이지 않는 작업 영역
 
@@ -128,3 +129,4 @@
 - 시나리오: 미표시 :: 작업 영역 역할과 테넌트 점검
 
 > 출처: https://learn.microsoft.com/en-us/azure/sentinel/microsoft-sentinel-onboard
+> 확인일: 2026-11-25
