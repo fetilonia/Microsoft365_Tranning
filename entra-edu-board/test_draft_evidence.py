@@ -82,6 +82,27 @@ class DraftScenarioEvidenceTest(unittest.TestCase):
         self.assertIn("if(view.routes.length<2){ el.hidden = true; return; }", template)
         self.assertIn("const st = {l1:0,l2:0,l3:0,l4:0,route:0,speed:1,paused:false};", template)
 
+    def test_workload_names_use_official_product_and_portal_labels(self):
+        expected = {
+            "intune": "Microsoft Intune admin center",
+            "purview": "Microsoft Purview portal",
+            "defender": "Microsoft Defender",
+            "copilot": "Microsoft Copilot",
+        }
+        self.assertEqual(build_edu_boards.BOARDS, expected)
+        template = (ROOT / "MainBoard.html").read_text(encoding="utf-8")
+        for name in expected.values():
+            self.assertIn(f"'{name}'", template)
+        self.assertIn("Microsoft Graph 기반 조직 데이터 흐름", template)
+        self.assertNotIn("'Copilot · Graph'", template)
+
+        for slug, name in expected.items():
+            page = (ROOT / f"edu-{slug}-board" / f"edu-{slug}-board.html").read_text(
+                encoding="utf-8"
+            )
+            self.assertIn(f"<title>교육 보드 · {name} — 기능별 데이터 흐름</title>", page)
+            self.assertIn(f"<h1>교육 보드 · {name} › 기능별 데이터 흐름</h1>", page)
+
 
 if __name__ == "__main__":
     unittest.main()

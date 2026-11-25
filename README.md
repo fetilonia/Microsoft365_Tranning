@@ -9,10 +9,10 @@ Microsoft 365 전반에 걸친 트레이닝 보드를 구축하고, 이를 바�
 | 폴더 | 내용 | 상태 |
 | --- | --- | --- |
 | [`entra-edu-board/`](entra-edu-board/) | Microsoft Entra Admin Center(Entra ID 워크로드) 교육 보드 — 기능 37개, 시나리오 261개 | 작성 중 |
-| [`edu-intune-board/`](edu-intune-board/) | Intune | 초안 |
-| [`edu-purview-board/`](edu-purview-board/) | Purview | 초안 |
-| [`edu-defender-board/`](edu-defender-board/) | Defender XDR · Defender for Cloud | 초안 |
-| [`edu-copilot-board/`](edu-copilot-board/) | Copilot · Graph | 초안 |
+| [`edu-intune-board/`](edu-intune-board/) | Microsoft Intune admin center | 초안 |
+| [`edu-purview-board/`](edu-purview-board/) | Microsoft Purview portal | 초안 |
+| [`edu-defender-board/`](edu-defender-board/) | Microsoft Defender — Microsoft Defender XDR · Microsoft Defender for Cloud | 초안 |
+| [`edu-copilot-board/`](edu-copilot-board/) | Microsoft Copilot — Microsoft Graph 기반 조직 데이터 흐름 | 초안 |
 | 각 보드의 `원본/` | 기능별 편집 원고 | 시나리오 작성 완료 · 제품/테넌트 검증 진행 중 |
 | [`entra-edu-board/split/`](entra-edu-board/split/) | 기존 분리본 원고 | 참고용 |
 
