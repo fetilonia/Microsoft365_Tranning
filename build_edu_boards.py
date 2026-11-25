@@ -12,10 +12,10 @@ board = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(board)
 
 BOARDS = {
-    "intune": "Intune",
-    "purview": "Purview",
-    "defender": "Defender",
-    "copilot": "Copilot · Graph",
+    "intune": "Microsoft Intune admin center",
+    "purview": "Microsoft Purview portal",
+    "defender": "Microsoft Defender",
+    "copilot": "Microsoft Copilot",
 }
 
 
