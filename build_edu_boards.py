@@ -34,17 +34,18 @@ def annotate_scenario_evidence(data):
     for product in data:
         for feature in product["l2"]:
             for l3 in feature["l3"]:
-                urls = board.source_urls([{"l2": [{"l3": [l3]}]}])
-                official_sources = sorted(
-                    url for url in urls
-                    if urlsplit(url).hostname
-                    and (
-                        urlsplit(url).hostname.lower() == "microsoft.com"
-                        or urlsplit(url).hostname.lower().endswith(".microsoft.com")
-                        or urlsplit(url).hostname.lower() == "aka.ms"
-                    )
-                )
+                shared_urls = board.l3_source_urls(l3)
                 for scenario in l3["l4"]:
+                    urls = shared_urls | board.note_source_urls(scenario.get("notes", []))
+                    official_sources = sorted(
+                        url for url in urls
+                        if urlsplit(url).hostname
+                        and (
+                            urlsplit(url).hostname.lower() == "microsoft.com"
+                            or urlsplit(url).hostname.lower().endswith(".microsoft.com")
+                            or urlsplit(url).hostname.lower() == "aka.ms"
+                        )
+                    )
                     evidence_text = "\n".join(_strings({
                         "l3_desc": l3["desc"],
                         "l3_notes": l3["notes"],
@@ -79,6 +80,12 @@ def build(name, destination):
         "시나리오 버튼을 누르면 그 흐름만 재생합니다. 공식 문서 출처와 교육 예시는 구분하고, "
         "[확인 필요] 항목은 대상 테넌트에서 확인하세요."
     )
+    if name == "purview":
+        draft_intro = (
+            "Information Protection 솔루션 카드를 열어 기능을 선택하세요. 분류 기능에는 공식 문서에 근거한 "
+            "네 가지 분류 시나리오가 있으며, 실제 선택 경로가 있는 경우에만 분기됩니다. "
+            "테넌트별 조건은 [확인 필요] 표시와 원고 출처를 확인하세요."
+        )
     nav = "$('#prev').disabled = idx<=0; $('#next').disabled = idx>=FLAT.length-1;"
     if old_title not in template or old_heading not in template or intro not in template or nav not in template:
         raise ValueError("Entra 템플릿의 제목 또는 안내 문구가 변경되었습니다")

@@ -58,6 +58,13 @@ button{font:inherit;color:inherit;cursor:pointer}
 .l1:not(.open) .l1body{display:none}
 .grp{margin:10px 2px 4px 4px;font-size:10px;font-weight:700;color:var(--mut);letter-spacing:.4px;display:flex;align-items:center;gap:6px}
 .grp::after{content:"";flex:1;height:1px;background:var(--line2)}
+.solution-nav{border-color:#3fb59c}
+.solution-nav .id{color:#81d8c6}
+.solution-nav .nm i{white-space:normal}
+.solution-nav .car{transition:transform .2s}
+.solution-nav[aria-expanded="false"] .car{transform:rotate(-90deg)}
+.solution-nav:hover,.solution-nav:focus-visible{background:#193e37;outline:none}
+.solution-nav.sel{background:#1b453d;border-color:var(--acc);box-shadow:0 0 0 1px var(--acc)}
 button.section-toggle{margin-top:10px}
 .card{width:100%;display:flex;gap:8px;align-items:flex-start;text-align:left;background:#123530;border:1.5px solid var(--line2);border-radius:8px;padding:7px 9px;margin:4px 0;opacity:.78;transition:.15s}
 .card:hover{opacity:1;border-color:var(--line)}
@@ -68,6 +75,19 @@ button.section-toggle{margin-top:10px}
 .card .n{font-size:10px;color:var(--mut);white-space:nowrap}.card .n.todo{color:#c9a44f}
 .card.sel{opacity:1;border-color:var(--acc);background:#1d3a2e;box-shadow:0 0 0 1px var(--acc),0 0 14px rgba(255,122,69,.3)}
 .card.sel .dot{background:var(--acc)}
+.solution-home{max-width:1120px;margin:0 auto}
+.solution-hero{padding:22px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(130deg,#133f37,#102e29 70%);box-shadow:0 8px 26px rgba(0,0,0,.16)}
+.solution-hero .eyebrow{margin:0 0 8px;color:#81d8c6;font-size:10px;font-weight:800;letter-spacing:1px}
+.solution-hero h2{margin:0;font-size:24px}
+.solution-hero p{max-width:720px;margin:8px 0 0;color:#c4ddd7;font-size:13px;line-height:1.55}
+.solution-hero .checked{display:inline-block;margin-top:12px;color:var(--mut);font-size:10px}
+.solution-home h3{margin:20px 0 8px;font-size:15px}
+.solution-feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px}
+.solution-feature-card{min-height:110px;text-align:left;padding:14px;border:1.5px solid var(--line);border-radius:10px;background:#123530}
+.solution-feature-card:hover,.solution-feature-card:focus-visible{border-color:var(--acc);outline:none;background:#173d35}
+.solution-feature-card b{display:block;font-size:14px}
+.solution-feature-card p{margin:6px 0 14px;color:var(--mut);font-size:11.5px;line-height:1.45}
+.solution-feature-card span{color:#8be3c4;font-size:10px}
 
 /* 중앙 */
 #center{flex:1;min-width:0;overflow:auto;padding:16px 22px 50px}
@@ -348,6 +368,13 @@ table.tt{width:100%;border-collapse:collapse;table-layout:fixed;font-size:11.5px
 .src.pol{color:#05202c;background:#7fd6ff}.src.inp{color:#2a1c00;background:#ffd37a}.src.man{color:#fff;background:#8a5fd0}
 .sumnote{margin-top:6px;font-size:10px;color:var(--mut);line-height:1.6}
 @media (max-width:1100px){.sim-sum{position:static}}
+@media (max-width:760px){
+  body.purview-board .main{flex-direction:column}
+  body.purview-board #blade{width:100%;max-height:38%;border-right:0;border-bottom:1px solid var(--line2)}
+  body.purview-board #center{flex:1;min-height:0;padding:12px}
+  body.purview-board .solution-hero{padding:16px}
+  body.purview-board .solution-hero h2{font-size:20px}
+}
 
 /* ── 시뮬레이터: 시나리오 경로 강조 ── */
 .node.offroute{opacity:.36;filter:saturate(.6)}
@@ -480,9 +507,19 @@ const rich = s => esc(s).replace(/\[([^\]]*확인 필요[^\]]*)\]/g,'<span class
 const REDUCED = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 const st = {l1:0,l2:0,l3:0,l4:0,route:0,speed:1,paused:false};
+const initialSolutionFeature = DATA[0] && DATA[0].l2.find(item=>item.solution);
+let solutionView = initialSolutionFeature ? initialSolutionFeature.solution : null;
 const open = DATA.map((_,i)=>i===0);
 const groupOpen = new Map();
+const solutionOpen = new Map();
 const isEntra = l1 => l1.id === '01' && l1.name === 'Microsoft Entra Admin Center';
+const isPurview = l1 => l1.id === '03';
+const SOLUTION_CARDS = {
+  'Information Protection': {
+    description: '민감한 정보를 어디에 저장되거나 이동하든 검색하고, 분류하고, 보호하는 기능을 제공합니다.',
+    source: 'https://learn.microsoft.com/purview/information-protection'
+  }
+};
 const groupKey = (i,g) => `${i}:${g}`;
 let runId = 0, chainId = 0, view = null;
 const FLAT = [];
@@ -513,7 +550,30 @@ function renderBlade(){
     });
     keys.forEach((g,k)=>{
       const list = document.createElement('div');
-      if(entra){
+      const entries = groups.get(g);
+      const solutionEntry = entries.find(([l2])=>l2.solution);
+      const solution = solutionEntry ? solutionEntry[0].solution : null;
+      const solutionCard = !entra && isPurview(l1) && solution && entries.every(([l2])=>l2.solution===solution);
+      if(solutionCard){
+        const meta = SOLUTION_CARDS[solution] || {};
+        const card = document.createElement('button'); card.type='button';
+        const key = groupKey(i,g);
+        const expanded = solutionOpen.get(key) !== false;
+        list.id = `solution-group-${i}-${k}`;
+        list.hidden = !expanded;
+        card.className = 'l1h solution-nav' + (solutionView===solution?' sel':'');
+        card.setAttribute('aria-current',solutionView===solution?'page':'false');
+        card.setAttribute('aria-controls',list.id);
+        card.setAttribute('aria-expanded',String(expanded));
+        card.innerHTML = `<span class="id">IP</span><span class="nm"><b>${esc(solution)}</b><i>${esc(meta.description||'')}</i></span><span class="cnt">${entries.length}</span><span class="car" aria-hidden="true">${expanded?'▾':'▸'}</span>`;
+        card.onclick = ()=>{
+          const next = card.getAttribute('aria-expanded') !== 'true';
+          solutionOpen.set(key,next);
+          if(next) selectSolution(i,solution);
+          else renderBlade();
+        };
+        body.appendChild(card);
+      } else if(entra){
         const key = groupKey(i,g);
         const expanded = groupOpen.get(key) !== false;
         const gh = document.createElement('button'); gh.className='l1h section-toggle';
@@ -538,10 +598,10 @@ function renderBlade(){
       } else {
         const gh = document.createElement('div'); gh.className='grp'; gh.textContent = g; body.appendChild(gh);
       }
-      groups.get(g).forEach(([l2,j])=>{
+      entries.forEach(([l2,j])=>{
         const n = l2.l3.reduce((a,x)=>a+x.l4.length,0);
         const c = document.createElement('button');
-        c.className = 'card' + (i===st.l1&&j===st.l2?' sel':'') + (n?'':' empty');
+        c.className = 'card' + (!solutionView&&i===st.l1&&j===st.l2?' sel':'') + (n?'':' empty');
         c.innerHTML = `<span class="dot"></span><span class="ct"><b>${rich(l2.title)}</b><i>${rich(l2.desc)}</i></span>` + (n?`<span class="n">${n}개</span>`:'<span class="n todo">작성 필요</span>');
         c.onclick = ()=>selectL2(i,j);
         list.appendChild(c);
@@ -550,12 +610,26 @@ function renderBlade(){
     });
     sec.appendChild(body); el.appendChild(sec);
   });
-  const sel = el.querySelector('.card.sel'); if(sel) sel.scrollIntoView({block:'nearest'});
+  const sel = el.querySelector('.card.sel, .solution-nav.sel'); if(sel) sel.scrollIntoView({block:'nearest'});
 }
 
 function stopAll(){ runId++; chainId++; }
+function defaultL3(i,j){
+  const l1 = DATA[i], l2 = l1.l2[j];
+  const classifierTab = l2.l3.findIndex(l3=>l3.id==='A');
+  return isPurview(l1)&&l2.solution==='Information Protection'&&l2.title.startsWith('데이터 분류')&&classifierTab>=0 ? classifierTab : 0;
+}
+function selectSolution(i,name){
+  const first = DATA[i].l2.findIndex(l2=>l2.solution===name);
+  if(first<0) return;
+  solutionOpen.set(groupKey(i,DATA[i].l2[first].group||'기능 목록'),true);
+  stopAll(); solutionView=name; Object.assign(st,{l1:i,l2:first,l3:0,l4:0,route:0}); open[i]=true;
+  renderBlade(); renderCenter();
+}
 function selectL2(i,j){
-  stopAll(); Object.assign(st,{l1:i,l2:j,l3:0,l4:0,route:0}); open[i]=true;
+  const feature = DATA[i].l2[j];
+  if(isPurview(DATA[i])&&feature.solution) solutionOpen.set(groupKey(i,feature.group||'기능 목록'),true);
+  stopAll(); solutionView=null; Object.assign(st,{l1:i,l2:j,l3:defaultL3(i,j),l4:0,route:0}); open[i]=true;
   if(isEntra(DATA[i])) groupOpen.set(groupKey(i,DATA[i].l2[j].group || '기능 목록'),true);
   renderBlade(); renderCenter();
 }
@@ -564,9 +638,45 @@ function curL2(){ return DATA[st.l1].l2[st.l2]; }
 /* ───────── 중앙 ───────── */
 function l4Label(l4){ return l4.label || ('▶ ' + (l4.sub || '이 흐름 재생')); }
 const isStateL3 = l3 => l3.l4.length>1 && l3.l4.every(x=>x.label && '⓪①②'.includes(x.label[0]));
+function renderSolutionCenter(l1,name){
+  const meta = SOLUTION_CARDS[name] || {};
+  const features = l1.l2.map((feature,index)=>({feature,index})).filter(item=>item.feature.solution===name);
+  const first = features[0] && features[0].feature;
+  const cards = features.map(({feature,index})=>{
+    const scenarioCount = feature.l3.reduce((sum,l3)=>sum+l3.l4.length,0);
+    const classifierTab = feature.solution==='Information Protection'&&feature.title.startsWith('데이터 분류')
+      ? feature.l3.find(l3=>l3.id==='A') : null;
+    const detail = classifierTab ? `${classifierTab.l4.length}개 분류 시나리오` : `${feature.l3.length}개 흐름 · ${scenarioCount}개 시나리오`;
+    return `<button type="button" class="solution-feature-card" data-index="${index}" aria-label="${esc(feature.title)} 기능 열기"><b>${rich(feature.title)}</b><p>${rich(feature.desc)}</p><span>${detail}</span></button>`;
+  }).join('');
+  const sources = first && first.solution_source ? [first.solution_source] : [];
+  $('#s1').textContent = `${l1.id} · ${l1.name}`;
+  $('#s2').textContent = name;
+  $('#s3').textContent = '기능 선택';
+  $('#s4').textContent = '—';
+  $('.chip.c2 small').textContent = '솔루션';
+  $('.chip.c3 small').textContent = '기능';
+  $('.chip.c4 small').textContent = '시나리오';
+  let h = `<div class="solution-home"><section class="solution-hero"><p class="eyebrow">MICROSOFT PURVIEW SOLUTION</p><h2>${esc(name)}</h2><p>${esc(meta.description||'')}</p>`
+    + (first&&first.solution_checked_on?`<span class="checked">솔루션 설명 확인일 · ${esc(first.solution_checked_on)}</span>`:'')
+    + `</section><h3>이 솔루션의 기능</h3><div class="solution-feature-grid">${cards}</div>`
+    + sourcePanelHtml(sources) + `</div>`;
+  $('#center').innerHTML = h;
+  $('#center').querySelectorAll('.solution-feature-card').forEach(button=>{
+    button.onclick = ()=>selectL2(st.l1,+button.dataset.index);
+  });
+  view = null; syncNav();
+}
 function renderCenter(){
   if(typeof closePop==='function') closePop();
-  const l1 = DATA[st.l1], l2 = curL2();
+  const l1 = DATA[st.l1];
+  document.body.classList.toggle('purview-board',isPurview(l1));
+  document.body.classList.toggle('solution-view',Boolean(solutionView&&isPurview(l1)));
+  if(solutionView&&isPurview(l1)){ renderSolutionCenter(l1,solutionView); return; }
+  $('.chip.c2 small').textContent = 'L2 · 기능';
+  $('.chip.c3 small').textContent = 'L3 · 분류';
+  $('.chip.c4 small').textContent = 'L4 · 시나리오';
+  const l2 = curL2();
   const l3 = l2.l3[st.l3];
   if(l3 && l3.sim){ simInit(l3); l3.l4 = [simGenerate()]; st.l4 = 0; }
   const l4 = l3 && l3.l4[st.l4];
@@ -608,8 +718,9 @@ function renderCenter(){
   h += `<div class="narr idle" id="narr"></div>`;
   h += `<div id="tasks"></div>`;
   h += summaryHtml(l2);
-  const notes = l3.notes.filter(n=>n.kind!=='출처');
-  const sources = l3.notes.filter(n=>n.kind==='출처').map(n=>n.text);
+  const allNotes = [...l3.notes,...(l4&&l4.notes||[])];
+  const notes = allNotes.filter(n=>n.kind!=='출처');
+  const sources = allNotes.filter(n=>n.kind==='출처').map(n=>n.text);
   if(notes.length) h += `<div class="notes">` + notes.map(n=>noteHtml(n)).join('') + `</div>`;
   h += sourcePanelHtml(sources);
   $('#center').innerHTML = h;
@@ -1161,9 +1272,11 @@ $('#restart').onclick = ()=>{ stopAll(); playCurrent(); };
   const q = new URLSearchParams(location.search);
   const f = q.get('f');
   if(f){
+    solutionView = null;
     for(const [i,j] of FLAT){ if(DATA[i].l2[j].title.includes(f)){ Object.assign(st,{l1:i,l2:j}); open[i]=true; break; } }
     const l2 = curL2();
-    st.l3 = Math.min(+(q.get('l3')||0), Math.max(0,l2.l3.length-1));
+    const l3Query = q.get('l3');
+    st.l3 = l3Query===null ? defaultL3(st.l1,st.l2) : Math.min(+l3Query, Math.max(0,l2.l3.length-1));
     st.l4 = l2.l3.length ? Math.min(+(q.get('l4')||0), l2.l3[st.l3].l4.length-1) : 0;
     st.route = +(q.get('route')||0);
   }
