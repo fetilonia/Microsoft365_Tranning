@@ -58,7 +58,7 @@
 - 소개: 브라우저를 닫았다 열어도 로그인 상태를 유지할지 정합니다
 - 위치: 보호 › 조건부 액세스 › 정책 › 새 정책 만들기 › 액세스 제어 › 세션 › 영구 브라우저 세션(Persistent browser session) [확인 필요: 한글 UI 문구]
 - 동작: 인증 세션 토큰(쿠키)의 지속 여부를 정합니다. 모든 탭이 한 세션 토큰을 공유하므로 대상 리소스를 모든 리소스로만 지정할 수 있고, 같은 사용자에게는 회사 브랜딩의 로그인 유지 설정보다 우선합니다.
-- 사용자 경험: 미구성 기본값은 개인 디바이스 사용자에게 인증 후 로그인 유지(Stay signed in?) 프롬프트를 보여 줍니다. 정책 적용 시 프롬프트 표시 여부는 [확인 필요].
+- 사용자 경험: 미구성 기본값은 개인 디바이스 사용자에게 인증 후 로그인 유지(Stay signed in?) 프롬프트를 보여 줍니다. CA 정책의 영구 브라우저 세션 설정은 같은 사용자에 대한 회사 브랜딩의 Stay signed in? 설정을 재정의합니다. 정책 적용 시 별도 프롬프트 표시 여부는 [확인 필요].
 - 미충족 시: 브라우저 세션에만 적용됩니다. 네이티브 앱·비브라우저 흐름에는 효과가 없어 해당 클라이언트 토큰은 영향받지 않습니다.
 - 지원 주체: 사용자 [확인 필요: 게스트·워크로드 ID 지원 여부]
 - 제약·주의: 모든 리소스 대상 전용. 지속 쿠키는 CA 재평가 없이 토큰 만료까지 쓰일 수 있어 보안 위험. 옵션 값(항상/안 함) 이름·로그인 빈도 및 디바이스 ID와의 상호작용 [확인 필요].
@@ -125,14 +125,14 @@
 - 사용자 경험: 사용자 프롬프트는 없고 Global Secure Access를 거치는 인터넷 접속에 필터링 결과(허용·차단)가 적용됩니다 [확인 필요: 차단 화면 문구]. 새 프로필 반영에 60~90분이 걸릴 수 있습니다.
 - 미충족 시: 정책이 일치하지 않으면 연결한 프로필이 적용되지 않습니다. 단 기준(baseline) 보안 프로필은 CA 연결 없이 모든 인터넷 트래픽에 최저 우선순위로 적용됩니다.
 - 지원 주체: 사용자 [확인 필요: 게스트·워크로드 ID 지원 여부]
-- 제약·주의: 대상 리소스에 모든 인터넷 리소스(Global Secure Access)를 선택. Explicit Forward Proxy(미리 보기)는 이 그룹에 포함되지 않음. 라이선스(Microsoft Entra Internet Access) [확인 필요].
-- 로그: Global Secure Access 트래픽 로그에서 필터링 정책 결과를 봅니다 [확인 필요]. 로그인 로그 표기 문자열도 [확인 필요].
+- 제약·주의: 대상 리소스에 모든 인터넷 리소스(Global Secure Access)를 선택. Explicit Forward Proxy(미리 보기)는 이 그룹에 포함되지 않음. Microsoft Entra Internet Access는 Microsoft Entra Suite에 포함되거나 독립형으로 제공되며, 사용자는 Microsoft Entra ID P1 또는 P2 라이선스가 필요합니다.
+- 로그: Global Secure Access 네트워크 트래픽 로그에는 적용된 정책 정보가 포함됩니다. 조건부 액세스 로그인 로그의 정확한 표기 문자열은 [확인 필요: 포털 필드명].
 - 노드 제목: 보안 프로필 연결
 - 노드 보조: 인터넷 트래픽에 적용할 필터링 정책 묶음을 선택
 - 해설: 조건에 맞는 사용자에게 토큰으로 보안 프로필을 전달해 인터넷 트래픽에 필터링 정책을 적용합니다.
 - 주체: Entra ID, Global Secure Access
 - 데이터: 연결된 보안 프로필, 필터링 정책 우선순위, 대상 리소스(인터넷 트래픽)
-- 출처: https://learn.microsoft.com/entra/global-secure-access/concept-internet-access;https://learn.microsoft.com/entra/global-secure-access/how-to-configure-web-content-filtering;https://learn.microsoft.com/entra/identity/conditional-access/concept-conditional-access-session
+- 출처: https://learn.microsoft.com/entra/global-secure-access/concept-internet-access;https://learn.microsoft.com/entra/global-secure-access/overview-what-is-global-secure-access;https://learn.microsoft.com/entra/global-secure-access/how-to-configure-web-content-filtering;https://learn.microsoft.com/entra/identity/conditional-access/concept-conditional-access-session
 
 > 교육 포인트: 조건부 액세스는 ‘누가(할당) → 무엇에(대상 리소스) → 어떤 조건에서 → 어떻게 통제(허용·세션)’의 if-then 문입니다. 정책은 모두 평가되고, 걸린 정책의 요구는 AND로 합쳐집니다.
 >

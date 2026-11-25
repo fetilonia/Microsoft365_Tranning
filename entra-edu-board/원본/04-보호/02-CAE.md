@@ -4,7 +4,7 @@
 - 강제(Enforcement): CAE 지원 리소스가 토큰 거부 (401 + claims challenge) | Exchange Online · SharePoint Online · Teams · Microsoft Graph (지원 앱 조합 한정)
 - 증적(Evidence): 로그인 로그 "Is CAE Token" 필터 | IP address (seen by resource) 열 · CAE 인사이트 워크북
 - 메뉴(Admin Center): 보호 > 조건부 액세스 > 정책 > 세션 > 연속 액세스 평가
-- 라이선스(License): 중요 이벤트 평가는 조건부 액세스 정책 없이도 모든 테넌트에서 동작 | 위치 정책 기반 평가와 정책 세션 컨트롤은 조건부 액세스(Entra ID P1) 필요 [확인 필요: 고객 라이선스]
+- 라이선스(License): 중요 이벤트 평가는 조건부 액세스 정책 없이 모든 테넌트에서 사용 가능(지원 클라이언트·리소스 조합 한정) | 위치 정책 기반 평가와 정책 세션 컨트롤은 조건부 액세스(Entra ID P1 또는 Microsoft 365 Business Premium) 필요 [확인 필요: 고객의 SKU 보유·대상 사용자 할당]
 
 ### L3 · 0 · 기능 상태 전이 — 표준 토큰(1시간) → 위치 정책과 CAE 모드 구성 → 이벤트 즉시 반영
 

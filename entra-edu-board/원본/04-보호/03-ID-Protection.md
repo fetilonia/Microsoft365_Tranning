@@ -4,7 +4,7 @@
 - 강제(Enforcement): CA 평가 시 사용자 위험 · 로그인 위험 수준 반영 | 신뢰도 매우 높은 위험 로그인은 내장 보호가 자동 차단 (AADSTS50053)
 - 증적(Evidence): GET /v1.0/identityProtection/riskDetections · riskyUsers | KQL: AADUserRiskEvents · AADRiskyUsers · SigninLogs (RiskLevelDuringSignIn · RiskState)
 - 메뉴(Admin Center): 보호 > ID Protection
-- 라이선스(License): 위험 기반 CA 정책 · 개요(Overview) · 알림 · MFA 등록 정책 · Graph 전체 위험 보고서는 Entra ID P2(또는 Entra Suite) 필요 · 무료·P1은 위험 사용자(중간·높음만, 상세 창·이력 없음)와 위험 로그인(위험 수준·상세 없음)만 제한적으로 보이고 위험 탐지 보고서는 무료 불가·P1은 상세 창 없음 · Premium 탐지는 P2 없으면 generic(Additional risk detected)으로만 표시 · Defender 신호 기반 탐지는 해당 Defender 제품 라이선스도 필요 [확인 필요: 고객 라이선스]
+- 라이선스(License): 위험 기반 CA 정책 · 개요(Overview) · 알림 · MFA 등록 정책 · Graph 전체 위험 보고서는 Entra ID P2(또는 Entra Suite) 필요 · 무료·P1은 위험 사용자(중간·높음만, 상세 창·이력 없음)와 위험 로그인(위험 수준·상세 없음)만 제한적으로 보이고 위험 탐지 보고서는 무료 불가·P1은 상세 창 없음 · Premium 탐지는 P2 없으면 generic(Additional risk detected)으로만 표시 · Defender 신호 기반 탐지는 해당 Defender 제품 라이선스도 필요 [확인 필요: 고객의 SKU·Defender 제품 보유 및 대상 사용자 할당]
 
 ### L3 · 0 · 기능 상태 전이 — 탐지만 → 위험 기반 정책 → 자동 해결
 
@@ -29,8 +29,8 @@
    - 아니오 → 4
 4. [처리] 위험 조건을 쓰는 CA 정책이 없음
    - 주체: Entra ID
-   - 위치: Entra ID › 조건부 액세스(Conditional Access) › 정책 (보호 › 조건부 액세스) · ID Protection › 대시보드의 레거시 위험 정책(사용자 위험·로그인 위험)
-   - 데이터: 정책 조건 userRiskLevels · signInRiskLevels 가 비어 있음 · 레거시 ID Protection 위험 정책은 2026년 10월 1일 폐기 예정이라 CA로 이전해야 함
+   - 위치: Entra ID › 조건부 액세스(Conditional Access) › 정책 (보호 › 조건부 액세스) · 레거시 정책 이전 안내의 ID Protection › 대시보드
+   - 데이터: 정책 조건 userRiskLevels · signInRiskLevels 가 비어 있음 · Microsoft가 공지한 레거시 ID Protection 위험 정책 폐기일은 2026년 10월 1일이며 확인 시점에 지남. 공식 문서는 여전히 폐기를 미래형으로 안내함 [확인 필요: 실제 폐기 여부와 테넌트별 레거시 정책 메뉴·사용 가능 여부]
    - 해설: 위험 수준이 허용·차단 판정에 전혀 쓰이지 않습니다. 위험 기반 정책은 P2(또는 Entra Suite)가 있어야 만들 수 있고, 무료·P1 테넌트는 보고서만 제한적으로 볼 수 있습니다
 5. [처리] 위험 사용자가 보고서에만 쌓임
    - 주체: 로그
@@ -85,7 +85,7 @@
    - 주체: 관리자
    - 위치: 새 정책 › 정책 사용 › 보고 전용 (Report-only) › 만들기
    - 데이터: conditionalAccessPolicy.state = enabledForReportingButNotEnforced · SigninLogs ConditionalAccessPolicies · 정책 영향(Policy impact) 보기
-   - 해설: 실제 차단 없이 영향 범위를 로그로 먼저 확인합니다. 레거시 ID Protection 위험 정책에서 이전하는 경우에도 같은 방식으로 CA 정책을 보고 전용으로 만든 뒤 켜고, ID Protection › 대시보드의 옛 정책은 정책 적용(Enforce policy)을 사용 안 함으로 바꿉니다
+   - 해설: 실제 차단 없이 영향 범위를 로그로 먼저 확인합니다. Microsoft의 레거시 정책 이전 안내는 CA 정책을 보고 전용으로 확인한 뒤 켜고 옛 정책을 사용 안 함으로 바꾸도록 설명합니다. 옛 정책 메뉴의 실제 사용 가능 여부는 ⓪ 4번의 확인 사항입니다
 9. [끝] 영향 확인 뒤 정책 사용을 켜기로 전환
    - 주체: 관리자
    - 위치: 정책 편집 › 정책 사용 › 켜기 (On)
