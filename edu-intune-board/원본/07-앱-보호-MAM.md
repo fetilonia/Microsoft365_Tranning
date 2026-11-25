@@ -104,7 +104,7 @@
 > 주의: 허용 대상과 붙여넣기 결과는 플랫폼·정책 값·앱 버전에 따라 [확인 필요: 기능·플랫폼·정책 모드별 동작을 최신 Microsoft Learn 및 격리된 테스트 테넌트에서 재현해 확인]입니다.
 > 출처: https://learn.microsoft.com/en-us/intune/app-management/protection/overview
 
-#### L4 · ▶ BYOD Outlook 데이터 이동 — 정책과 대상 앱을 비교한다
+#### L4 · BYOD Outlook 데이터 이동 — 정책과 대상 앱을 비교한다
 
 1. [시작] 사용자가 Android Outlook에서 회사 메일 내용을 선택한다
    - 주체: 사용자

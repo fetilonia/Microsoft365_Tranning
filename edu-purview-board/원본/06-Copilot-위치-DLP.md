@@ -103,9 +103,9 @@
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
 > 확인일: 2026-11-25
 
-### L3 · A · 동작별 차이 — 대표 시나리오: 민감 프롬프트의 외부 웹 검색 제한
+### L3 · A · 동작별 차이
 
-#### L4 · ▶ 웹 검색과 전체 처리 제한 비교 — 같은 SIT에 다른 동작 지정
+#### L4 · 웹 검색과 전체 처리 제한 비교 — 같은 SIT에 다른 동작 지정
 
 1. [시작] SIT에 일치하는 가상 프롬프트 준비
    - 주체: 관리자

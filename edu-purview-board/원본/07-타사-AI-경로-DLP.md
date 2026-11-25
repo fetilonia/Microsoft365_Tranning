@@ -106,9 +106,9 @@
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
 > 확인일: 2026-11-25
 
-### L3 · A · 기기와 네트워크 경로 — 대표 시나리오: AI 전송 경로별 통제 확인
+### L3 · A · 기기와 네트워크 경로
 
-#### L4 · ▶ 지원 기기 경로와 네트워크 경로 비교 — 다른 강제 지점을 구별
+#### L4 · 지원 기기 경로와 네트워크 경로 비교 — 다른 강제 지점을 구별
 
 1. [시작] 관리자가 AI 사이트 전송 사례 확인
    - 주체: 관리자

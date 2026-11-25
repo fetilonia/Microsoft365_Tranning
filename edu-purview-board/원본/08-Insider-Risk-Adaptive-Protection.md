@@ -105,9 +105,9 @@
 > 출처: https://learn.microsoft.com/en-us/purview/insider-risk-management-adaptive-protection-guide
 > 출처: https://learn.microsoft.com/en-us/office365/servicedescriptions/microsoft-365-service-descriptions/microsoft-365-tenantlevel-services-licensing-guidance/microsoft-purview-service-description
 
-### L3 · A · 동적 DLP 적용 — 대표 시나리오: 위험 수준에 따른 공유 정책 비교
+### L3 · A · 동적 DLP 적용
 
-#### L4 · ▶ Elevated와 다른 수준의 동일 공유 — 위험 조건이 정책 대상을 바꾼다
+#### L4 · Elevated와 다른 수준의 동일 공유 — 위험 조건이 정책 대상을 바꾼다
 
 1. [시작] 동일한 외부 공유와 두 사용자 준비
    - 주체: 관리자
