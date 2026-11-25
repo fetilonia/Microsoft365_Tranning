@@ -13,7 +13,7 @@ Microsoft 365 전반에 걸친 트레이닝 보드를 구축하고, 이를 바�
 | [`edu-purview-board/`](edu-purview-board/) | Purview | 초안 |
 | [`edu-defender-board/`](edu-defender-board/) | Defender XDR · Defender for Cloud | 초안 |
 | [`edu-copilot-board/`](edu-copilot-board/) | Copilot · Graph | 초안 |
-| 각 보드의 `원본/` | 기능별 편집 원고 | 검증 및 시나리오 작성 필요 |
+| 각 보드의 `원본/` | 기능별 편집 원고 | 시나리오 작성 완료 · 제품/테넌트 검증 진행 중 |
 | [`entra-edu-board/split/`](entra-edu-board/split/) | 기존 분리본 원고 | 참고용 |
 
 제품별 보드를 나눕니다. Defender 보드는 XDR과 Defender for Cloud를 별도 섹션으로 담습니다.
