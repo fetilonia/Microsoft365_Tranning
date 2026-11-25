@@ -55,6 +55,51 @@ class DraftScenarioEvidenceTest(unittest.TestCase):
         self.assertEqual(evidence["official_sources"], [source])
         self.assertTrue(evidence["needs_check"])
 
+    def test_scenario_source_notes_are_kept_with_their_own_scenario(self):
+        shared = "https://learn.microsoft.com/purview/information-protection"
+        pattern = "https://learn.microsoft.com/purview/sit-sensitive-information-type-learn-about"
+        edm = "https://learn.microsoft.com/purview/sit-learn-about-exact-data-match-based-sits"
+        data = [{"l2": [{"l3": [{
+            "desc": "Classifier scenarios",
+            "notes": [{"kind": "출처", "text": shared}],
+            "l4": [
+                {"label": "Pattern SIT", "sub": "Pattern matching", "nodes": [], "edges": [],
+                 "notes": [{"kind": "출처", "text": pattern}]},
+                {"label": "EDM", "sub": "Exact values", "nodes": [], "edges": [],
+                 "notes": [{"kind": "출처", "text": edm}]},
+            ],
+        }]}]}]
+
+        build_edu_boards.annotate_scenario_evidence(data)
+
+        pattern_sources = data[0]["l2"][0]["l3"][0]["l4"][0]["evidence"]["official_sources"]
+        edm_sources = data[0]["l2"][0]["l3"][0]["l4"][1]["evidence"]["official_sources"]
+        self.assertEqual(pattern_sources, sorted([shared, pattern]))
+        self.assertEqual(edm_sources, sorted([shared, edm]))
+
+    def test_fingerprint_exact_and_partial_routes_do_not_overlap(self):
+        purview = build_board.parse(
+            build_board.assemble(ROOT / "edu-purview-board" / "원본")
+        )
+        feature = next(
+            feature for product in purview for feature in product["l2"]
+            if feature.get("solution") == "Information Protection"
+            and feature["title"].startswith("데이터 분류")
+        )
+        scenarios = next(l3 for l3 in feature["l3"] if l3["id"] == "A")["l4"]
+        fingerprint = next(
+            scenario for scenario in scenarios if scenario["label"].startswith("문서 지문")
+        )
+        routes = {
+            route["key"]: set(route["nodes"])
+            for route in build_board.enum_routes(fingerprint)
+        }
+
+        self.assertIn("4", routes["전체 텍스트 정확 일치"])
+        self.assertNotIn("5", routes["전체 텍스트 정확 일치"])
+        self.assertIn("5", routes["템플릿 일부 일치"])
+        self.assertNotIn("4", routes["템플릿 일부 일치"])
+
     def test_draft_manuscripts_no_longer_require_a_main_scenario_marker(self):
         for slug in build_edu_boards.BOARDS:
             data = build_board.parse(

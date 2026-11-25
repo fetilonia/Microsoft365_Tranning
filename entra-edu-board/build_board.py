@@ -15,7 +15,7 @@ from urllib.parse import urlsplit
 HERE = Path(__file__).resolve().parent
 NODE = re.compile(r"^(\d+)\.\s*\[(시작|처리|판단|차단|끝)\]\s*(.*)$")
 INLINE = re.compile(r"^\[(시작|처리|판단|차단|끝)\]\s*(.*)$")
-META = re.compile(r"^- (설정|강제|증적|메뉴|라이선스)\([^)]*\):\s*(.*)$")
+META = re.compile(r"^- (설정|강제|증적|메뉴|라이선스|솔루션|솔루션 출처|솔루션 확인일)\([^)]*\):\s*(.*)$")
 FIELD = re.compile(r"^(주체|위치|데이터|해설):\s*(.*)$")
 WARN = []
 
@@ -194,6 +194,12 @@ def parse(text):
                     l2["menu"] = val
                     grp = re.sub(r"\[[^\]]*\]", "", val.split(">")[0]).strip()
                     l2["group"] = grp
+                elif key == "솔루션":
+                    l2["solution"] = val
+                elif key == "솔루션 출처":
+                    l2["solution_source"] = val
+                elif key == "솔루션 확인일":
+                    l2["solution_checked_on"] = val
                 else:
                     l2[{"설정": "set", "강제": "enf", "증적": "evi"}[key]] = [x.strip() for x in val.split(" | ")]
             continue
@@ -201,7 +207,12 @@ def parse(text):
             body = line.lstrip(">").strip()
             m = re.match(r"^([^:：]{1,10})[:：]\s*(.*)$", body)
             if m:
-                l3["notes"].append({"kind": m.group(1).strip(), "text": m.group(2).strip()})
+                raw_kind = m.group(1).strip()
+                scenario_scoped = raw_kind.startswith("시나리오 ")
+                kind = raw_kind[len("시나리오 "):] if scenario_scoped else raw_kind
+                note = {"kind": kind, "text": m.group(2).strip()}
+                target = l4.setdefault("notes", []) if scenario_scoped and l4 is not None else l3["notes"]
+                target.append(note)
             continue
         if l4 is None:
             continue
@@ -285,19 +296,35 @@ def assemble(parts_dir):
     return "\n".join(f.read_text(encoding="utf-8").rstrip() + "\n" for f in files)
 
 
+def note_source_urls(notes):
+    urls = set()
+    pattern = re.compile(r"https?://[^\s;<>]+")
+    for note in notes:
+        if note["kind"] == "출처":
+            urls.update(pattern.findall(note["text"]))
+    return urls
+
+
+def l3_source_urls(tab):
+    urls = note_source_urls(tab.get("notes", []))
+    pattern = re.compile(r"https?://[^\s;<>]+")
+    for group in tab.get("sim", {}).get("groups", []):
+        urls.update(pattern.findall(group["f"].get("출처", "")))
+        for option in group["options"]:
+            urls.update(pattern.findall(option["f"].get("출처", "")))
+    return urls
+
+
 def source_urls(data):
     urls = set()
     pattern = re.compile(r"https?://[^\s;<>]+")
     for product in data:
         for feature in product["l2"]:
+            urls.update(pattern.findall(feature.get("solution_source", "")))
             for tab in feature["l3"]:
-                for note in tab["notes"]:
-                    if note["kind"] == "출처":
-                        urls.update(pattern.findall(note["text"]))
-                for group in tab.get("sim", {}).get("groups", []):
-                    urls.update(pattern.findall(group["f"].get("출처", "")))
-                    for option in group["options"]:
-                        urls.update(pattern.findall(option["f"].get("출처", "")))
+                urls.update(l3_source_urls(tab))
+                for scenario in tab.get("l4", []):
+                    urls.update(note_source_urls(scenario.get("notes", [])))
     return urls
 
 
