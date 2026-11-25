@@ -30,7 +30,7 @@
 - 미충족 시: 조건이 안 맞으면 Report-only: Not applied(reportOnlyNotApplied)로 남고 사용자 영향은 없습니다.
 - 지원 주체: 사용자, 게스트, 워크로드 ID, 에이전트
 - 제약·주의: '사용자 작업' 범위 항목은 보고 전용으로 평가할 수 없습니다. 디바이스 준수 요구 정책은 macOS·iOS·Android에서 인증서 선택 프롬프트가 반복될 수 있어 해당 플랫폼 제외를 권장합니다.
-- 로그: result = reportOnlySuccess·Failure·NotApplied·Interrupted (포털: Report-only Success·Failure·User action required·Not applied, 대응 [확인 필요])
+- 로그: 포털 보고 전용 결과는 Success·Failure·User action required·Not applied로 표시되고, Microsoft Graph의 `result` 값은 reportOnlySuccess·reportOnlyFailure·reportOnlyInterrupted·reportOnlyNotApplied입니다.
 - 출처: https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-report-only;https://learn.microsoft.com/en-us/graph/api/resources/appliedconditionalaccesspolicy?view=graph-rest-1.0
 
 ##### 옵션 · st-off · 사용 안 함
@@ -40,6 +40,6 @@
 - 매칭: 일치 여부를 따지지 않습니다. 상태가 꺼져 있으므로 모든 로그인에서 비대상입니다.
 - 미충족 시: 해당 없음 — 항상 비적용입니다. 롤백이 필요할 때 정책을 삭제하지 않고 끌 수 있습니다.
 - 지원 주체: 사용자, 게스트, 워크로드 ID, 에이전트
-- 제약·주의: 끈 정책은 보호가 사라진 것입니다. 로그인 로그에 notEnabled 항목이 실제로 표시되는 범위는 포털 UI 기준 [확인 필요].
-- 로그: result = notEnabled (정책이 비활성 상태라서 적용 안 됨).
-- 출처: https://learn.microsoft.com/en-us/graph/api/resources/appliedconditionalaccesspolicy?view=graph-rest-1.0;https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity
+- 제약·주의: 끈 정책은 보호가 사라진 것입니다.
+- 로그: 포털 로그인 로그의 조건부 액세스 결과는 Disabled이며, Microsoft Graph의 `appliedConditionalAccessPolicy.result` 값은 notEnabled입니다.
+- 출처: https://learn.microsoft.com/en-us/graph/api/resources/appliedconditionalaccesspolicy?view=graph-rest-1.0;https://learn.microsoft.com/entra/identity/monitoring-health/concept-sign-in-log-activity-details;https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity

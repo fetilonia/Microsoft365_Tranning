@@ -4,7 +4,7 @@
 - 강제(Enforcement): Entra 암호 재설정 서비스 (passwordreset.microsoftonline.com) | 등록된 인증 방법으로 본인 확인 후 재설정
 - 증적(Evidence): 감사 로그 범주 Self-Service Password Management | 인증 방법 활동 보고서 · GET /v1.0/reports/authenticationMethods/userRegistrationDetails
 - 메뉴(Admin Center): 보호 > 암호 재설정 (문서 기준 경로: Entra ID > Password reset)
-- 라이선스(License): 클라우드 사용자의 SSPR 재설정은 Entra ID P1·P2 또는 Microsoft 365 Business Standard 이상 · 암호 쓰기 저장(하이브리드)은 P1·P2 또는 Microsoft 365 Business Premium(Business Standard·Basic은 쓰기 저장 불가) · 아는 암호를 바꾸는 클라우드 사용자 암호 변경은 Free도 가능 [확인 필요: 고객 라이선스]
+- 라이선스(License): 클라우드 사용자의 SSPR 재설정은 Entra ID P1·P2 또는 Microsoft 365 Business Standard 이상 · 암호 쓰기 저장(하이브리드)은 P1·P2 또는 Microsoft 365 Business Premium(Business Standard·Basic은 쓰기 저장 불가) · 아는 암호를 바꾸는 클라우드 사용자 암호 변경은 Free도 가능 [확인 필요: 고객의 SKU 보유·대상 사용자 할당 및 쓰기 저장 자격]
 
 ### L3 · 0 · 기능 상태 전이 — 헬프데스크 의존 → SSPR 구성 → 셀프 재설정
 

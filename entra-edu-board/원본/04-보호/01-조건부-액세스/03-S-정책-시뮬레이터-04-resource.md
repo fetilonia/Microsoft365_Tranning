@@ -62,9 +62,9 @@
 - 매칭: 요청(토큰)에 해당 인증 컨텍스트 ID 요구가 있고 토큰의 acrs가 아직 충족되지 않았을 때 일치합니다. 앱은 acrs를 확인해 부족하면 claims challenge로 재인증을 요구합니다.
 - 미충족 시: 컨텍스트를 충족하지 못하면 보호된 작업·사이트 접근이 거부되고, 클라이언트가 Entra로 돌아가 컨트롤(MFA 등)을 거쳐 재시도합니다.
 - 지원 주체: 사용자, 게스트
-- 제약·주의: 사용자를 로그인시키는 앱에서만 지원되고 자체 신원으로 인증하는 앱은 미지원입니다. 워크로드 ID와 조합 가능하다는 Learn 문구와 상충해 [확인 필요]. 사용자와 워크로드 ID는 한 정책에 함께 쓸 수 없습니다.
+- 제약·주의: 워크로드 ID 정책은 service principal을 대상으로 하며 인증 컨텍스트와 조합할 수 있습니다. 사용자와 워크로드 ID는 한 정책에 함께 쓸 수 없습니다.
 - 로그: 인증 컨텍스트가 적용된 로그인은 로그인 로그의 조건부 액세스 평가에서 확인합니다. 삭제 전 로그로 사용 여부를 점검합니다.
-- 출처: https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps;https://learn.microsoft.com/en-us/entra/identity-platform/developer-guide-conditional-access-authentication-context;https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites
+- 출처: https://learn.microsoft.com/en-us/entra/identity/conditional-access/concept-conditional-access-cloud-apps;https://learn.microsoft.com/en-us/entra/identity/conditional-access/workload-identity;https://learn.microsoft.com/en-us/entra/identity-platform/developer-guide-conditional-access-authentication-context;https://learn.microsoft.com/en-us/purview/sensitivity-labels-teams-groups-sites
 
 ##### 옵션 · r-gsa-internet · Global Secure Access: 인터넷 트래픽
 - 소개: GSA 인터넷 액세스 트래픽 전달 프로필 연결(터널)에 정책을 적용합니다.
